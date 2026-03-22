@@ -1,0 +1,52 @@
+baseURL = 'https://gibflow.gi/'
+languageCode = 'en-gb'
+title = 'GibFlow'
+theme = 'PaperMod'
+
+[params]
+  env         = 'development'
+  description = 'Modern, eco-conscious digital solutions rooted in Gibraltar.'
+  keywords    = ['Gibraltar', 'sustainability', 'digital', 'eco', 'technology']
+  author      = 'GibFlow Team'
+
+  # Theme controls – 'auto' defers to OS preference; JS maps it to 'light'/'dark'
+  # data-theme values align with our custom DaisyUI themes
+  defaultTheme = 'auto'
+
+  ShowReadingTime      = true
+  ShowCodeCopyButtons  = true
+  ShowShareButtons     = false
+  ShowBreadCrumbs      = true
+  disableThemeToggle   = false
+
+  [params.homeInfoParams]
+    Title   = 'Welcome to GibFlow 🌊'
+    Content = 'Modern, eco-conscious digital solutions from the heart of Gibraltar.'
+
+  [[params.socialIcons]]
+    name = 'github'
+    url  = 'https://github.com/'
+
+[menu]
+  [[menu.main]]
+    identifier = 'home'
+    name       = 'Home'
+    url        = '/'
+    weight     = 10
+
+  [[menu.main]]
+    identifier = 'about'
+    name       = 'About'
+    url        = '/about/'
+    weight     = 30
+
+[build]
+  writeStats = true
+
+[markup.goldmark.renderer]
+  # Allow raw HTML blocks in Markdown content pages.
+  # Required when wrapping shortcodes in layout divs (e.g. CSS grid containers).
+  unsafe = true
+
+
+

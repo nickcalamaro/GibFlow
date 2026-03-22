@@ -1,0 +1,34 @@
+{{- /*
+  ─── reveal ────────────────────────────────────────────────────────────────────
+  Wraps any content in a scroll-reveal container. Elements inside will fade
+  and slide up when they enter the viewport (CSS + Intersection Observer).
+
+  Parameters:
+    stagger  – "true" | "false"  animate direct children in sequence (default: "false")
+    delay    – 1 | 2 | 3         optional extra delay tier (maps to 150ms / 300ms / 450ms)
+
+  Usage — single block:
+    {{< reveal >}}
+    {{< stats >}}...{{< /stats >}}
+    {{< /reveal >}}
+
+  Usage — staggered grid (each card animates in sequence):
+    {{< reveal stagger="true" >}}
+    <div class="grid sm:grid-cols-3 gap-6">
+      {{< card title="A" >}}{{< /card >}}
+      {{< card title="B" >}}{{< /card >}}
+      {{< card title="C" >}}{{< /card >}}
+    </div>
+    {{< /reveal >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $stagger := eq (.Get "stagger" | default "false") "true" -}}
+{{- $delay   := .Get "delay" | default "" -}}
+
+{{- $cls := "reveal" -}}
+{{- if $stagger }}{{- $cls = printf "%s reveal-stagger" $cls -}}{{- end -}}
+{{- if $delay   }}{{- $cls = printf "%s reveal-delay-%s" $cls $delay -}}{{- end -}}
+
+<div class="{{ $cls }}">
+  {{ .Inner }}
+</div>

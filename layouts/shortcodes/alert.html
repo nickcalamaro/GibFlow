@@ -1,0 +1,38 @@
+{{- /*
+  ─── alert ─────────────────────────────────────────────────────────────────────
+  DaisyUI alert component for notices, tips, warnings, and errors.
+
+  Parameters:
+    type   – info | success | warning | error  (default: "info")
+    title  – optional bold prefix text (e.g. "Note:", "Important:")
+    icon   – override the default icon emoji
+
+  Inner content:
+    The alert body. Supports markdown when called with {{% %}} syntax.
+
+  Usage:
+    {{< alert type="success" title="Done!" >}}Your form was submitted.{{< /alert >}}
+    {{< alert type="warning" >}}This page is a draft.{{< /alert >}}
+    {{< alert type="info"    >}}Shortcode requires DaisyUI 5.{{< /alert >}}
+    {{< alert type="error"   >}}Could not connect to the API.{{< /alert >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $type  := .Get "type"  | default "info" -}}
+{{- $title := .Get "title" | default "" -}}
+
+{{- /* Default icons per type */}}
+{{- $icons := dict
+    "info"    "ℹ️"
+    "success" "✅"
+    "warning" "⚠️"
+    "error"   "❌"
+-}}
+{{- $icon := .Get "icon" | default (index $icons $type | default "ℹ️") -}}
+
+<div role="alert" class="alert alert-{{ $type }} alert-soft my-4">
+  <span aria-hidden="true" class="text-xl leading-none">{{ $icon }}</span>
+  <div class="text-sm">
+    {{- if $title }}<strong class="font-semibold">{{ $title }}</strong> {{- end -}}
+    {{- .Inner }}
+  </div>
+</div>

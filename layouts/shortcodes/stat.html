@@ -1,0 +1,32 @@
+{{- /*
+  ─── stat ──────────────────────────────────────────────────────────────────────
+  Individual stat item. Nest inside {{< stats >}}.
+
+  Parameters:
+    value  – headline number or text  (required)
+    label  – stat title               (required)
+    desc   – supporting description   (optional)
+    icon   – emoji shown top-right    (optional)
+    color  – DaisyUI colour token for the value and icon:
+             primary | secondary | accent | success | warning | error | info
+             (default: "primary")
+
+  Usage: see {{< stats >}} shortcode for a full example.
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $value := .Get "value" | default "–" -}}
+{{- $label := .Get "label" | default "" -}}
+{{- $desc  := .Get "desc"  | default "" -}}
+{{- $icon  := .Get "icon"  | default "" -}}
+{{- $color := .Get "color" | default "primary" -}}
+
+<div class="stat">
+  {{- if $icon }}
+  <div class="stat-figure text-{{ $color }} text-4xl leading-none" aria-hidden="true">
+    {{ $icon }}
+  </div>
+  {{- end }}
+  {{- if $label }}<div class="stat-title">{{ $label }}</div>{{- end }}
+  <div class="stat-value text-{{ $color }}">{{ $value }}</div>
+  {{- if $desc }}<div class="stat-desc">{{ $desc }}</div>{{- end }}
+</div>

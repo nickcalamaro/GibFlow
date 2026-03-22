@@ -1,0 +1,80 @@
+{{- /*
+  ─── form-field ────────────────────────────────────────────────────────────────
+  A single labelled form field using DaisyUI's fieldset + input/select/textarea.
+  Includes DaisyUI's `validator` class so HTML5 validation styling is automatic.
+
+  Parameters:
+    type        – text | email | tel | url | number | password | date |
+                  textarea | select   (default: "text")
+    name        – input name attribute  (required)
+    label       – fieldset legend text  (required)
+    placeholder – input placeholder    (optional)
+    hint        – helper text below the field (optional)
+    required    – "true" marks the field as required for HTML5 validation
+    color       – DaisyUI colour token: primary | accent | etc. (optional)
+    rows        – rows attribute for textarea  (default: "4")
+
+  Inner content:
+    Used only when type="select". Each line of inner content is rendered as an
+    <option>. For simple static options, use the `options` param (comma-separated).
+    Example: {{< form-field type="select" name="topic" label="Topic" options="General,Support,Sales" >}}
+
+  Usage:
+    {{< form-field type="email" name="email" label="Email Address"
+        placeholder="you@example.com" required="true"
+        hint="We'll never share your email." >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $type    := .Get "type"        | default "text" -}}
+{{- $name    := .Get "name"        | default "" -}}
+{{- $label   := .Get "label"       | default "" -}}
+{{- $ph      := .Get "placeholder" | default "" -}}
+{{- $hint    := .Get "hint"        | default "" -}}
+{{- $req     := eq (.Get "required" | default "false") "true" -}}
+{{- $color   := .Get "color"       | default "" -}}
+{{- $rows    := .Get "rows"        | default "4" -}}
+{{- $options := .Get "options"     | default "" -}}
+
+<fieldset class="fieldset w-full">
+  {{- if $label }}
+  <legend class="fieldset-legend">
+    {{ $label }}
+    {{- if $req }}<span class="text-error ml-0.5" aria-hidden="true">*</span>{{- end }}
+  </legend>
+  {{- end }}
+
+  {{- if eq $type "textarea" -}}
+  <textarea
+    name="{{ $name }}"
+    {{- if $ph }} placeholder="{{ $ph }}"{{- end }}
+    rows="{{ $rows }}"
+    {{- if $req }} required{{- end }}
+    class="textarea w-full{{ if $color }} textarea-{{ $color }}{{ end }} validator">
+  </textarea>
+
+  {{- else if eq $type "select" -}}
+  <select
+    name="{{ $name }}"
+    {{- if $req }} required{{- end }}
+    class="select w-full{{ if $color }} select-{{ $color }}{{ end }} validator">
+    <option value="" disabled selected>{{ if $ph }}{{ $ph }}{{ else }}Choose…{{ end }}</option>
+    {{- if $options -}}
+      {{- range (split $options ",") -}}
+      <option value="{{ trim . " " }}">{{ trim . " " }}</option>
+      {{- end -}}
+    {{- end -}}
+  </select>
+
+  {{- else -}}
+  <input
+    type="{{ $type }}"
+    name="{{ $name }}"
+    {{- if $ph }} placeholder="{{ $ph }}"{{- end }}
+    {{- if $req }} required{{- end }}
+    class="input w-full{{ if $color }} input-{{ $color }}{{ end }} validator" />
+  {{- end }}
+
+  {{- if $hint }}
+  <p class="label text-xs text-base-content/55 mt-1">{{ $hint }}</p>
+  {{- end }}
+</fieldset>

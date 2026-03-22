@@ -1,0 +1,32 @@
+{{- /*
+  ─── eco-label ─────────────────────────────────────────────────────────────────
+  Branded eco-sustainability badge with optional tooltip.
+  A GibFlow-specific visual shorthand for environmental claims.
+
+  Parameters:
+    icon   – emoji icon                    (default: "🌿")
+    color  – DaisyUI colour token          (default: "accent")
+    tip    – tooltip text on hover         (optional)
+
+  Inner content:
+    The claim text (default: "Eco-Conscious").
+
+  Usage:
+    {{< eco-label >}}Carbon Neutral{{< /eco-label >}}
+    {{< eco-label icon="♻️" tip="ISO 14001 certified" >}}Certified{{< /eco-label >}}
+    {{< eco-label icon="☀️" color="warning" >}}Solar Powered{{< /eco-label >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $icon  := .Get "icon"  | default "🌿" -}}
+{{- $color := .Get "color" | default "accent" -}}
+{{- $tip   := .Get "tip"   | default "" -}}
+{{- $label := .Inner | default "Eco-Conscious" -}}
+
+{{- if $tip }}
+<span class="tooltip tooltip-bottom" data-tip="{{ $tip }}">
+{{- end -}}
+<span class="badge badge-{{ $color }} badge-soft gap-1.5 font-medium text-xs py-2.5 px-3">
+  <span aria-hidden="true">{{ $icon }}</span>
+  <span>{{ $label }}</span>
+</span>
+{{- if $tip }}</span>{{- end }}

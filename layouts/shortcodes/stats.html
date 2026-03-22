@@ -1,0 +1,16 @@
+{{- /*
+  ─── stats ─────────────────────────────────────────────────────────────────────
+  Container for `stat` shortcodes. Renders a DaisyUI stats block.
+  Stacks vertically on mobile, horizontal from sm breakpoint.
+
+  Usage:
+    {{< stats >}}
+      {{< stat value="420"  label="Projects Delivered" desc="Since 2018" icon="🚀" >}}
+      {{< stat value="98%"  label="Client Retention"   desc="Rolling 12-month" icon="⭐" color="secondary" >}}
+      {{< stat value="0 kg" label="Net Carbon Output"  desc="Fully offset operations" icon="🌿" color="accent" >}}
+    {{< /stats >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+<div class="stats stats-vertical sm:stats-horizontal shadow w-full my-6 rounded-box border border-base-200">
+  {{ .Inner }}
+</div>

@@ -1,0 +1,323 @@
+/* =============================================================================
+   GibFlow — Main Stylesheet
+   Tailwind CSS 4 + DaisyUI 5
+   Custom themes: "light" and "dark" (map to PaperMod's data-theme values)
+   ============================================================================= */
+
+@import "tailwindcss";
+
+/* ─── Tell Tailwind where to look for utility classes ─────────────────────── */
+@source "../../layouts";
+@source "../../content";
+@source "../../themes/PaperMod/layouts";
+
+/* ─── DaisyUI 5 plugin ────────────────────────────────────────────────────── */
+/*
+   Theme names are intentionally "light" and "dark" so they map to the
+   data-theme="light" / data-theme="dark" values set by PaperMod's theme toggle.
+*/
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+  logs: false;
+}
+
+/* =============================================================================
+   GibFlow Light Theme
+   Palette inspired by the Rock of Gibraltar:
+     · Mediterranean deep blue  → primary (sea, sky, professionalism)
+     · Warm limestone gold      → secondary (the Rock, sunlight, warmth)
+     · Sage/olive green         → accent   (ecology, greenery, sustainability)
+   ============================================================================= */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* ── Brand ── */
+  --color-primary:          oklch(42% 0.17 248);   /* Mediterranean deep blue   */
+  --color-primary-content:  oklch(97% 0.01 248);
+
+  --color-secondary:        oklch(70% 0.14 72);    /* Gibraltar limestone gold  */
+  --color-secondary-content:oklch(20% 0.05 72);
+
+  --color-accent:           oklch(50% 0.13 145);   /* Mediterranean olive green */
+  --color-accent-content:   oklch(97% 0.01 145);
+
+  --color-neutral:          oklch(30% 0.03 248);
+  --color-neutral-content:  oklch(93% 0.01 248);
+
+  /* ── Surfaces ── */
+  --color-base-100:         oklch(99%  0.005 248); /* White canvas              */
+  --color-base-200:         oklch(95%  0.010 248); /* Soft off-white            */
+  --color-base-300:         oklch(89%  0.018 248); /* Light stone               */
+  --color-base-content:     oklch(22%  0.030 248); /* Near-black body text      */
+
+  /* ── Semantic ── */
+  --color-info:             oklch(60%  0.15 220);
+  --color-info-content:     oklch(98%  0.005 220);
+  --color-success:          oklch(54%  0.16 145);
+  --color-success-content:  oklch(98%  0.005 145);
+  --color-warning:          oklch(76%  0.16 72);
+  --color-warning-content:  oklch(22%  0.06 72);
+  --color-error:            oklch(58%  0.22 25);
+  --color-error-content:    oklch(98%  0.005 25);
+
+  /* ── Shape & Scale ── */
+  --radius-selector: 0.5rem;
+  --radius-field:    0.375rem;
+  --radius-box:      0.75rem;
+
+  --size-selector:   0.25rem;
+  --size-field:      0.25rem;
+
+  --border: 1px;
+  --depth:  1;
+  --noise:  0;
+}
+
+/* =============================================================================
+   GibFlow Dark Theme
+   Gibraltar at night — the Rock silhouette against a deep navy Atlantic sky.
+   ============================================================================= */
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  /* ── Brand (brightened for dark backgrounds) ── */
+  --color-primary:          oklch(62% 0.17 248);   /* Brighter Mediterranean blue */
+  --color-primary-content:  oklch(97% 0.01 248);
+
+  --color-secondary:        oklch(76% 0.13 72);    /* Warm gold still visible     */
+  --color-secondary-content:oklch(20% 0.05 72);
+
+  --color-accent:           oklch(65% 0.13 145);   /* Brighter eco green          */
+  --color-accent-content:   oklch(10% 0.02 145);
+
+  --color-neutral:          oklch(52% 0.04 248);
+  --color-neutral-content:  oklch(95% 0.01 248);
+
+  /* ── Surfaces ── */
+  --color-base-100:         oklch(18% 0.030 248);  /* Night sky                   */
+  --color-base-200:         oklch(23% 0.028 248);  /* Slightly lighter             */
+  --color-base-300:         oklch(29% 0.026 248);  /* Rock in shadow               */
+  --color-base-content:     oklch(91% 0.020 248);  /* Moonlit text                 */
+
+  /* ── Semantic ── */
+  --color-info:             oklch(68% 0.14 220);
+  --color-info-content:     oklch(10% 0.03 220);
+  --color-success:          oklch(66% 0.14 145);
+  --color-success-content:  oklch(10% 0.03 145);
+  --color-warning:          oklch(79% 0.15 72);
+  --color-warning-content:  oklch(22% 0.06 72);
+  --color-error:            oklch(64% 0.22 25);
+  --color-error-content:    oklch(98% 0.005 25);
+
+  /* ── Shape & Scale ── */
+  --radius-selector: 0.5rem;
+  --radius-field:    0.375rem;
+  --radius-box:      0.75rem;
+
+  --size-selector:   0.25rem;
+  --size-field:      0.25rem;
+
+  --border: 1px;
+  --depth:  1;
+  --noise:  0;
+}
+
+/* =============================================================================
+   Global utility overrides
+   Kept minimal — prefer DaisyUI tokens over custom CSS.
+   Add project-specific global rules here only when necessary.
+   ============================================================================= */
+
+/* Smooth transitions when the user switches light ↔ dark */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Tighter focus outline using brand primary */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ─── Button full restoration ─────────────────────────────────────────────────
+   PaperMod's reset.css declares this as *unlayered* CSS:
+     button, input, textarea { padding: 0; background: 0 0; border: 0; }
+     a, button { color: var(--primary); }          ← near-black in light mode
+   Unlayered rules beat ALL @layer rules regardless of specificity.
+   DaisyUI 5 puts every component style inside @layer daisyui.*, so PaperMod
+   wins — leaving buttons with transparent background, no border, no padding.
+   Fix: replicate DaisyUI's values as *unlayered* rules in this file.
+   Class selectors (.btn = 0,1,0) beat PaperMod's tag selectors (button = 0,0,1)
+   so our rules win even though both are unlayered.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Base .btn — restore shape, size, background, border */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding-inline: 1rem;
+  padding-block: 0;
+  min-height: 3rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  border-radius: var(--radius-field, 0.375rem);
+  text-decoration: none;
+  /* Default neutral colours */
+  background-color: var(--color-neutral);
+  border: 1px solid var(--color-neutral);
+  color: var(--color-neutral-content);
+}
+/* Size modifiers */
+.btn-sm  { padding-inline: 0.75rem; min-height: 2rem; font-size: 0.75rem; }
+.btn-lg  { padding-inline: 1.25rem; min-height: 4rem; font-size: 1.125rem; }
+
+/* Variant — solid filled */
+.btn-primary   { background-color: var(--color-primary);   border-color: var(--color-primary);   color: var(--color-primary-content);   }
+.btn-secondary { background-color: var(--color-secondary); border-color: var(--color-secondary); color: var(--color-secondary-content); }
+.btn-accent    { background-color: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-accent-content);    }
+.btn-neutral   { background-color: var(--color-neutral);   border-color: var(--color-neutral);   color: var(--color-neutral-content);   }
+.btn-info      { background-color: var(--color-info);      border-color: var(--color-info);      color: var(--color-info-content);      }
+.btn-success   { background-color: var(--color-success);   border-color: var(--color-success);   color: var(--color-success-content);   }
+.btn-warning   { background-color: var(--color-warning);   border-color: var(--color-warning);   color: var(--color-warning-content);   }
+.btn-error     { background-color: var(--color-error);     border-color: var(--color-error);     color: var(--color-error-content);     }
+
+/* Variant — ghost / link */
+.btn-ghost, .btn-link { background-color: transparent; border-color: transparent; color: var(--color-base-content); }
+
+/* Variant — outline (transparent fill, coloured border) */
+.btn-outline              { background-color: transparent; border-color: var(--color-base-content); color: var(--color-base-content); }
+.btn-outline.btn-primary  { border-color: var(--color-primary);   color: var(--color-primary);   }
+.btn-outline.btn-secondary{ border-color: var(--color-secondary); color: var(--color-secondary); }
+.btn-outline.btn-accent   { border-color: var(--color-accent);    color: var(--color-accent);    }
+
+/* ─── Badge padding ──────────────────────────────────────────────────────────
+   DaisyUI badge padding is in @layer components. Tailwind 4 preflight in
+   @layer base zeroes padding on all elements first. Declare unlayered so
+   it wins regardless of layer order.
+   ─────────────────────────────────────────────────────────────────────────── */
+.badge { padding-inline: 0.5rem; padding-block: 0.15rem; }
+.badge-xs { padding-inline: 0.375rem; }
+.badge-lg { padding-inline: 0.625rem; }
+.badge-xl { padding-inline: 0.75rem; }
+
+/* ─── Form field visibility ──────────────────────────────────────────────────
+   DaisyUI's default input border is 20% opacity on base-100 — near invisible
+   when the field sits inside a card with the same surface colour.
+   Add a tinted background + a definite base-300 border.
+   ─────────────────────────────────────────────────────────────────────────── */
+.input, .textarea, .select {
+  background-color: var(--color-base-200);
+  border: 1px solid var(--color-base-300);
+}
+.input:focus, .input:focus-within,
+.textarea:focus,
+.select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+/* ─── Checkbox restoration ────────────────────────────────────────────────────
+   PaperMod's `input { padding: 0; background: 0 0; border: 0 }` is unlayered
+   and beats DaisyUI's @layer checkbox styles, leaving it invisible.
+   These unlayered rules win via class-selector specificity (0,1,0 > 0,0,1).
+   ─────────────────────────────────────────────────────────────────────────── */
+.checkbox {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius-selector, 0.375rem);
+  border: 2px solid var(--color-base-300);
+  background-color: var(--color-base-100);
+  vertical-align: middle;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.checkbox::before {
+  content: "";
+  width: 0.75rem;
+  height: 0.75rem;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  background-color: white;
+  transform: scale(0);
+  transition: transform 0.1s;
+}
+.checkbox:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.checkbox:checked::before {
+  transform: scale(1);
+}
+.checkbox-primary:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ─── Scroll-reveal animations ────────────────────────────────────────────────
+   Elements marked .reveal start invisible and slide up when they enter the
+   viewport. The Intersection Observer in extend_footer.html adds .in-view.
+   Stagger: add .reveal-stagger to a grid/flex container and its direct
+   children are animated in sequence (up to 6 items).
+   All motion respects prefers-reduced-motion.
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    translate: 0 1.5rem;
+    transition: opacity 0.5s ease, translate 0.5s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  /* Stagger children inside a reveal-stagger grid / flex */
+  .reveal-stagger > * {
+    opacity: 0;
+    translate: 0 1rem;
+    transition: opacity 0.45s ease, translate 0.45s ease;
+  }
+  .reveal-stagger.in-view > * {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0ms;   }
+  .reveal-stagger.in-view > *:nth-child(2) { transition-delay: 80ms;  }
+  .reveal-stagger.in-view > *:nth-child(3) { transition-delay: 160ms; }
+  .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 240ms; }
+  .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 320ms; }
+  .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 400ms; }
+}
+
+/* ─── GibFlow footer ──────────────────────────────────────────────────────────
+   Uses .gf-footer (not DaisyUI's .footer) to avoid PaperMod's max-width
+   constraint on .footer { max-width: calc(720px + gap) }.
+   ─────────────────────────────────────────────────────────────────────────── */
+.gf-footer {
+  background-color: var(--color-base-200);
+  border-top: 1px solid var(--color-base-300);
+  margin-top: 4rem;
+}
+.gf-footer a {
+  border-bottom: none;  /* undo PaperMod's .footer a { border-bottom } */
+  color: inherit;
+}
+.gf-footer a:hover {
+  color: var(--color-primary);
+}

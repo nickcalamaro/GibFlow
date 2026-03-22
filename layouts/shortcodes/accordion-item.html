@@ -1,0 +1,26 @@
+{{- /*
+  ─── accordion-item ────────────────────────────────────────────────────────────
+  A single collapsible item. Must be nested inside {{< accordion >}}.
+
+  Parameters:
+    title  – the visible toggle label  (required)
+    open   – "true" to expand by default  (default: "false")
+
+  Inner content:
+    The body shown when expanded. Supports markdown with {{% %}} syntax.
+
+  Usage: see {{< accordion >}} for a full example.
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $title := .Get "title" | default "Toggle" -}}
+{{- $open  := eq (.Get "open" | default "false") "true" -}}
+
+<div class="collapse collapse-arrow join-item border-b border-base-200 last:border-b-0">
+  <input type="checkbox" {{ if $open }}checked{{- end }} />
+  <div class="collapse-title font-semibold text-base-content text-sm py-4 min-h-0">
+    {{ $title }}
+  </div>
+  <div class="collapse-content text-base-content/75 text-sm pb-4">
+    {{ .Inner }}
+  </div>
+</div>

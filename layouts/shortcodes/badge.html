@@ -1,0 +1,28 @@
+{{- /*
+  ─── badge ─────────────────────────────────────────────────────────────────────
+  DaisyUI inline badge/pill for tags, labels, and status indicators.
+
+  Parameters:
+    color  – neutral | primary | secondary | accent | ghost |
+             info | success | warning | error  (default: "neutral")
+    size   – xs | sm | md | lg | xl           (default: "sm")
+    style  – "" | "outline" | "soft" | "dash" (default: "")
+
+  Inner content:
+    The badge label text.
+
+  Usage:
+    {{< badge color="accent"   >}}Eco-Friendly{{< /badge >}}
+    {{< badge color="success"  >}}Live{{< /badge >}}
+    {{< badge color="warning"  >}}Beta{{< /badge >}}
+    {{< badge color="primary" style="outline" >}}v2.0{{< /badge >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $color := .Get "color" | default "neutral" -}}
+{{- $size  := .Get "size"  | default "sm" -}}
+{{- $style := .Get "style" | default "" -}}
+
+{{- $cls := printf "badge badge-%s badge-%s" $color $size -}}
+{{- if $style }}{{- $cls = printf "%s badge-%s" $cls $style -}}{{- end -}}
+
+<span class="{{ $cls }}">{{ .Inner }}</span>

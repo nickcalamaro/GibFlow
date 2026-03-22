@@ -1,0 +1,70 @@
+{{- /*
+  ─── cta ───────────────────────────────────────────────────────────────────────
+  Full-width call-to-action section with brand background.
+
+  Parameters:
+    title        – headline text
+    subtitle     – supporting text
+    btn          – primary button label
+    btn_link     – primary button href  (default: "#")
+    btn2         – secondary button label (optional)
+    btn2_link    – secondary button href  (default: "#")
+    variant      – DaisyUI colour token for the background:
+                   primary | secondary | accent | neutral
+                   (default: "primary")
+
+  Inner content (optional) is rendered between subtitle and buttons.
+
+  Usage:
+    {{< cta
+      title     = "Ready to cut your carbon footprint?"
+      subtitle  = "Join 40+ Gibraltar businesses making the switch to sustainable tech."
+      btn       = "Start Free Trial"  btn_link  = "/signup"
+      btn2      = "Talk to Us"        btn2_link = "/contact"
+    >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $title   := .Get "title"    | default "" -}}
+{{- $sub     := .Get "subtitle" | default "" -}}
+{{- $btn     := .Get "btn"      | default "" -}}
+{{- $btnLink := .Get "btn_link" | default "#" -}}
+{{- $btn2    := .Get "btn2"     | default "" -}}
+{{- $btn2Lnk := .Get "btn2_link"| default "#" -}}
+{{- $variant := .Get "variant"  | default "primary" -}}
+
+<section class="rounded-box bg-{{ $variant }} text-{{ $variant }}-content my-10 px-6 py-14 text-center">
+
+  {{- if $title }}
+  <h2 class="text-3xl md:text-4xl font-bold leading-tight">{{ $title }}</h2>
+  {{- end }}
+
+  {{- if $sub }}
+  <p class="mt-3 text-lg opacity-80 max-w-xl mx-auto">{{ $sub }}</p>
+  {{- end }}
+
+  {{- with .Inner }}
+  <div class="mt-3 opacity-90 max-w-lg mx-auto text-sm">{{ . }}</div>
+  {{- end }}
+
+  {{- if or $btn $btn2 }}
+  <div class="mt-8 flex flex-wrap gap-3 justify-center">
+    {{- if $btn }}
+    {{- /* Solid inverse button — light surface on brand background */}}
+    <a href="{{ $btnLink }}"
+       class="btn btn-lg font-semibold"
+       style="background-color: var(--color-base-100); color: var(--color-{{ $variant }}); border: none;">
+      {{ $btn }}
+    </a>
+    {{- end }}
+    {{- if $btn2 }}
+    {{- /* Ghost outline button — always legible on any brand background */}}
+    <a href="{{ $btn2Lnk }}"
+       class="btn btn-lg btn-outline"
+       style="color: var(--color-{{ $variant }}-content); border-color: color-mix(in oklch, var(--color-{{ $variant }}-content) 50%, transparent);">
+      {{ $btn2 }}
+    </a>
+    {{- end }}
+  </div>
+  {{- end }}
+
+</section>

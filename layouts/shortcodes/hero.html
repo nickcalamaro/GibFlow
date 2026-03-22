@@ -1,0 +1,86 @@
+{{- /*
+  ─── hero ──────────────────────────────────────────────────────────────────────
+  Full-width hero section using DaisyUI's hero component.
+
+  Parameters (all optional except title):
+    title       – headline text  (required)
+    subtitle    – supporting paragraph
+    cta         – primary CTA button label
+    cta_link    – primary CTA href  (default: "#")
+    cta2        – secondary CTA button label
+    cta2_link   – secondary CTA href (default: "#")
+    image       – background image URL (adds hero-overlay automatically)
+    align       – "center" | "start"  (default: "center")
+    min_height  – Tailwind min-h-* class (default: "min-h-[28rem]")
+
+  Inner content (optional) is rendered below the CTAs.
+
+  Usage:
+    {{< hero
+      title    = "Sustainable Business, Rooted in Gibraltar"
+      subtitle = "End-to-end digital solutions that put the planet first."
+      cta      = "Get Started"  cta_link  = "/contact"
+      cta2     = "Our Services" cta2_link = "/services"
+      image    = "/images/rock-panorama.jpg"
+    >}}
+    _Trusted by 40+ Gibraltar businesses since 2018._
+    {{< /hero >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $title    := .Get "title"      | default "" -}}
+{{- $subtitle := .Get "subtitle"   | default "" -}}
+{{- $cta      := .Get "cta"        | default "" -}}
+{{- $ctaLink  := .Get "cta_link"   | default "#" -}}
+{{- $cta2     := .Get "cta2"       | default "" -}}
+{{- $cta2Link := .Get "cta2_link"  | default "#" -}}
+{{- $image    := .Get "image"      | default "" -}}
+{{- $align    := .Get "align"      | default "center" -}}
+{{- $minH     := .Get "min_height" | default "min-h-[28rem]" -}}
+
+<section
+  class="hero {{ $minH }} rounded-box mb-8 overflow-hidden"
+  {{- if $image }} style="background-image: url('{{ $image }}');"{{- end }}>
+
+  {{- if $image -}}
+  <div class="hero-overlay rounded-box bg-base-content/50"></div>
+  {{- end }}
+
+  <div class="hero-content text-{{ $align }} flex-col max-w-3xl py-14 px-6">
+
+    {{- if $title }}
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight
+      {{- if $image }} text-white{{- else }} text-base-content{{- end }}">
+      {{ $title }}
+    </h1>
+    {{- end }}
+
+    {{- if $subtitle }}
+    <p class="mt-4 text-lg md:text-xl max-w-xl
+      {{- if $image }} text-white/80{{- else }} text-base-content/70{{- end }}">
+      {{ $subtitle }}
+    </p>
+    {{- end }}
+
+    {{- if or $cta $cta2 }}
+    <div class="mt-6 flex flex-wrap gap-3 justify-{{ $align }}">
+      {{- if $cta }}
+      <a href="{{ $ctaLink }}" class="btn btn-primary btn-lg">{{ $cta }}</a>
+      {{- end }}
+      {{- if $cta2 }}
+      <a href="{{ $cta2Link }}" class="btn btn-outline btn-lg
+        {{- if $image }} text-white border-white/60 hover:bg-white hover:text-primary{{- end }}">
+        {{ $cta2 }}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- with .Inner }}
+    <div class="mt-4 text-sm
+      {{- if $image }} text-white/70{{- else }} text-base-content/60{{- end }}">
+      {{ . }}
+    </div>
+    {{- end }}
+
+  </div>
+</section>

@@ -1,0 +1,58 @@
+{{- /*
+  ─── testimonial ───────────────────────────────────────────────────────────────
+  Styled blockquote for client testimonials and quotes.
+
+  Parameters:
+    author  – person's name               (required)
+    role    – job title or descriptor     (optional)
+    company – organisation name           (optional)
+    avatar  – URL to an avatar image      (optional)
+    color   – accent border colour token:
+              primary | secondary | accent | neutral  (default: "primary")
+
+  Inner content:
+    The quote text. Supports markdown when called with {{% %}} syntax.
+
+  Usage:
+    {{< testimonial
+      author  = "Maria Gomez"
+      role    = "CEO"
+      company = "Rock Renewables Ltd"
+      avatar  = "/images/avatars/maria.jpg"
+    >}}
+    GibFlow cut our server costs by 40% while reducing our emissions.
+    Couldn't recommend them more highly.
+    {{< /testimonial >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $author  := .Get "author"  | default "Anonymous" -}}
+{{- $role    := .Get "role"    | default "" -}}
+{{- $company := .Get "company" | default "" -}}
+{{- $avatar  := .Get "avatar"  | default "" -}}
+{{- $color   := .Get "color"   | default "primary" -}}
+
+<figure class="my-6 rounded-box border-l-4 border-{{ $color }} bg-base-200 px-6 py-5">
+
+  <blockquote class="text-base-content/90 text-base italic leading-relaxed">
+    "{{ .Inner }}"
+  </blockquote>
+
+  <figcaption class="mt-4 flex items-center gap-3">
+    {{- if $avatar }}
+    <div class="avatar">
+      <div class="w-10 rounded-full ring-2 ring-{{ $color }} ring-offset-base-100 ring-offset-1">
+        <img src="{{ $avatar }}" alt="{{ $author }}" loading="lazy">
+      </div>
+    </div>
+    {{- end }}
+    <div>
+      <p class="font-semibold text-base-content text-sm">{{ $author }}</p>
+      {{- if or $role $company }}
+      <p class="text-xs text-base-content/60">
+        {{- $role -}}{{- if and $role $company }}, {{- end -}}{{- $company -}}
+      </p>
+      {{- end }}
+    </div>
+  </figcaption>
+
+</figure>

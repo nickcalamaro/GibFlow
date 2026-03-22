@@ -1,0 +1,89 @@
+{{- /*
+  ─── card ──────────────────────────────────────────────────────────────────────
+  DaisyUI card component — for services, features, team members, blog teasers, etc.
+
+  Parameters (all optional):
+    title       – card heading
+    desc        – short supporting text
+    icon        – emoji or short text icon shown before the title
+    image       – URL for a top cover image
+    link        – href for the primary action button
+    link_text   – button label (default: "Learn more")
+    badge       – badge label (e.g. "New", "Popular")
+    badge_color – DaisyUI color token: primary | secondary | accent | success |
+                  warning | error | info  (default: "primary")
+    size        – xs | sm | md | lg | xl  (omitted = theme default)
+    variant     – "" | "border" | "dash"  (default: "")
+
+  Inner content (optional) is rendered in the card body, below desc.
+
+  Usage — self-closing:
+    {{< card
+      title = "Green Hosting"
+      desc  = "100% renewable energy datacentres in Gibraltar."
+      icon  = "🌿"
+      link  = "/services/hosting"
+      badge = "Eco"  badge_color = "accent"
+    >}}
+
+  Usage — with body content:
+    {{< card title="What we do" >}}
+    We help businesses reduce their digital carbon footprint through
+    smart infrastructure choices.
+    {{< /card >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+{{- $title      := .Get "title"       | default "" -}}
+{{- $desc       := .Get "desc"        | default "" -}}
+{{- $icon       := .Get "icon"        | default "" -}}
+{{- $image      := .Get "image"       | default "" -}}
+{{- $link       := .Get "link"        | default "" -}}
+{{- $linkText   := .Get "link_text"   | default "Learn more" -}}
+{{- $badge      := .Get "badge"       | default "" -}}
+{{- $badgeColor := .Get "badge_color" | default "primary" -}}
+{{- $size       := .Get "size"        | default "" -}}
+{{- $variant    := .Get "variant"     | default "" -}}
+
+{{- $cardClass := "card bg-base-100 shadow-sm hover:shadow-md transition-shadow duration-200" -}}
+{{- if $size    }}{{- $cardClass = printf "%s card-%s" $cardClass $size -}}{{- end -}}
+{{- if $variant }}{{- $cardClass = printf "%s card-%s" $cardClass $variant -}}{{- end -}}
+
+<div class="{{ $cardClass }}">
+
+  {{- if $image }}
+  <figure class="overflow-hidden">
+    <img src="{{ $image }}" alt="{{ $title }}" class="w-full object-cover" loading="lazy">
+  </figure>
+  {{- end }}
+
+  <div class="card-body">
+
+    {{- /* Title row with optional badge */}}
+    {{- if or $icon $title $badge }}
+    <div class="flex items-start justify-between gap-2 flex-wrap">
+      <h2 class="card-title text-base-content">
+        {{- if $icon }}<span aria-hidden="true" class="mr-1">{{ $icon }}</span>{{- end -}}
+        {{ $title }}
+      </h2>
+      {{- if $badge }}
+      <span class="badge badge-{{ $badgeColor }} badge-sm shrink-0 mt-0.5">{{ $badge }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- if $desc }}
+    <p class="text-base-content/70 mt-1 text-sm">{{ $desc }}</p>
+    {{- end }}
+
+    {{- with .Inner }}
+    <div class="mt-2 text-base-content/80 text-sm prose prose-sm max-w-none">{{ . }}</div>
+    {{- end }}
+
+    {{- if $link }}
+    <div class="card-actions justify-end mt-auto pt-4">
+      <a href="{{ $link }}" class="btn btn-primary btn-sm">{{ $linkText }}</a>
+    </div>
+    {{- end }}
+
+  </div>
+</div>

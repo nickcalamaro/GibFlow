@@ -1,0 +1,19 @@
+{{- /*
+  ─── accordion ─────────────────────────────────────────────────────────────────
+  Container for `accordion-item` shortcodes. Renders a joined collapse group.
+  Each item is independently toggleable (checkbox-based, not radio).
+
+  Usage:
+    {{< accordion >}}
+      {{< accordion-item title="What is GibFlow?" >}}
+        GibFlow is a Gibraltar-based digital agency…
+      {{< /accordion-item >}}
+      {{< accordion-item title="Do you work with remote clients?" open="true" >}}
+        Yes! We work with clients across the EU and beyond.
+      {{< /accordion-item >}}
+    {{< /accordion >}}
+  ──────────────────────────────────────────────────────────────────────────── */}}
+
+<div class="join join-vertical w-full my-6 rounded-box overflow-hidden border border-base-200">
+  {{ .Inner }}
+</div>

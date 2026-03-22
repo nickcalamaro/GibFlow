@@ -1,0 +1,29 @@
+{{- /*
+  extend_footer.html — GibFlow
+  Runs after all page HTML. Adds:
+    1. Intersection Observer for scroll-reveal (.reveal / .reveal-stagger)
+  Inline script — no external dependency, tiny footprint.
+*/ -}}
+<script>
+(function () {
+  // ── Scroll-reveal ──────────────────────────────────────────────────────────
+  // Watches every .reveal element; adds .in-view when 10% of it enters
+  // the viewport, then stops observing (animation fires once).
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.10 }
+  );
+
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
