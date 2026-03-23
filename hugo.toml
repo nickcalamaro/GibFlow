@@ -3,6 +3,10 @@ languageCode = 'en-gb'
 title        = "GibFlow — Gibraltar's Smart Mobility App"
 theme        = 'PaperMod'
 
+# Rewrite root-relative URLs (/foo) to absolute URLs using baseURL.
+# Required when the site is served from a subdirectory (e.g. /GibFlow/ on GitHub Pages).
+canonifyURLs = true
+
 # ── SEO ────────────────────────────────────────────────────────────────────────
 enableRobotsTXT = true
 
