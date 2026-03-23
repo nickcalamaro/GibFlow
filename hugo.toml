@@ -1,31 +1,31 @@
-baseURL = 'https://gibflow.gi/'
+baseURL      = 'https://gibflow.gi/'
 languageCode = 'en-gb'
-title = 'GibFlow'
-theme = 'PaperMod'
+title        = "GibFlow — Gibraltar's Smart Mobility App"
+theme        = 'PaperMod'
+
+# ── SEO ────────────────────────────────────────────────────────────────────────
+enableRobotsTXT = true
 
 [params]
-  env         = 'development'
-  description = 'Modern, eco-conscious digital solutions rooted in Gibraltar.'
-  keywords    = ['Gibraltar', 'sustainability', 'digital', 'eco', 'technology']
-  author      = 'GibFlow Team'
+  env    = 'production'
+  author = 'GibFlow Team'
 
-  # Theme controls – 'auto' defers to OS preference; JS maps it to 'light'/'dark'
-  # data-theme values align with our custom DaisyUI themes
-  defaultTheme = 'auto'
+  description = "GibFlow brings real-time bus info, cycling routes, parking and local services together in one app — built for Gibraltar by people who know how the city moves."
+  keywords    = ['Gibraltar app', 'Gibraltar transport', 'Gibraltar mobility', 'Gibraltar bus tracker', 'Gibraltar cycling', 'Gibraltar smart city', 'Gibraltar visitor guide']
 
-  ShowReadingTime      = true
-  ShowCodeCopyButtons  = true
-  ShowShareButtons     = false
-  ShowBreadCrumbs      = true
-  disableThemeToggle   = false
+  # Open Graph / Twitter card image
+  images = ['/inspiration/GibFlowBanner.jpg']
 
-  [params.homeInfoParams]
-    Title   = 'Welcome to GibFlow 🌊'
-    Content = 'Modern, eco-conscious digital solutions from the heart of Gibraltar.'
+  # Theme controls
+  defaultTheme       = 'auto'
+  disableThemeToggle = false
 
-  [[params.socialIcons]]
-    name = 'github'
-    url  = 'https://github.com/'
+  # Post display — mostly off for a product/marketing site
+  ShowReadingTime     = false
+  ShowCodeCopyButtons = false
+  ShowShareButtons    = false
+  ShowBreadCrumbs     = false
+  ShowPostNavLinks    = false
 
 [menu]
   [[menu.main]]
@@ -35,18 +35,26 @@ theme = 'PaperMod'
     weight     = 10
 
   [[menu.main]]
-    identifier = 'about'
-    name       = 'About'
-    url        = '/about/'
+    identifier = 'features'
+    name       = 'Features'
+    url        = '/#features'
+    weight     = 20
+
+  [[menu.main]]
+    identifier = 'businesses'
+    name       = 'For Businesses'
+    url        = '/#for-businesses'
     weight     = 30
+
+  [[menu.main]]
+    identifier = 'early-access'
+    name       = 'Get Early Access'
+    url        = '/#early-access'
+    weight     = 40
 
 [build]
   writeStats = true
 
 [markup.goldmark.renderer]
   # Allow raw HTML blocks in Markdown content pages.
-  # Required when wrapping shortcodes in layout divs (e.g. CSS grid containers).
   unsafe = true
-
-
-

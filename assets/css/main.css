@@ -6,10 +6,22 @@
 
 @import "tailwindcss";
 
+/* ─── Dark mode: respond to PaperMod's data-theme="dark" attribute ─────────── */
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Override PaperMod's body { background: var(--theme) } and
+   body.list { background: var(--code-bg) } (applied to the homepage).
+   body.list has specificity (0,1,1) which beats .list (0,1,0).
+   [data-theme="dark"] body.list (0,2,1) beats [data-theme="dark"] .list (0,2,0).
+   Our stylesheet loads after PaperMod's in the HTML head, so plain `body` also
+   wins on source order for the reset.css tag rule. */
+body,
+body.list { background: transparent; }
+[data-theme="dark"] body.list { background: transparent; }
+
 /* ─── Tell Tailwind where to look for utility classes ─────────────────────── */
 @source "../../layouts";
 @source "../../content";
-@source "../../themes/PaperMod/layouts";
 
 /* ─── DaisyUI 5 plugin ────────────────────────────────────────────────────── */
 /*
@@ -304,6 +316,49 @@ html {
   .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 320ms; }
   .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 400ms; }
 }
+
+/* =============================================================================
+   GibFlow Homepage Layout System
+   Structural essentials only — layouts are handled with Tailwind utilities
+   directly in the HTML rather than custom CSS classes.
+   ============================================================================= */
+
+/* ─── Homepage wrapper ────────────────────────────────────────────────────────
+   Negates PaperMod's .main padding so full-bleed sections reach viewport edges.
+   ─────────────────────────────────────────────────────────────────────────── */
+.gf-home {
+  margin-inline: calc(var(--gap, 24px) * -1);
+}
+
+/* ─── Shared max-width container ─────────────────────────────────────────── */
+.gf-container {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ─── Section spacing ─────────────────────────────────────────────────────── */
+/* Backgrounds use DaisyUI semantic tokens (bg-base-100, bg-base-200, bg-primary
+   etc.) set directly in HTML — these respond to theme changes automatically
+   without opacity tricks or scanner-seeding comments. */
+.gf-section { padding-block: 5rem; }
+
+/* ─── Trust bar ───────────────────────────────────────────────────────────── */
+.gf-trustbar {
+  background-color: var(--color-primary);
+  padding-block: 3rem;
+}
+
+/* ─── Heading colour fix for coloured sections ────────────────────────────────
+   PaperMod's reset.css sets `h1-h6 { color: var(--primary) }` as *unlayered*
+   CSS (near-black in light mode). This overrides DaisyUI's @layer text colour
+   utilities. These selectors have specificity 0,1,1 which beats PaperMod's
+   tag-only 0,0,1, so headings inside coloured sections display correctly.
+   ─────────────────────────────────────────────────────────────────────────── */
+.bg-primary   h1, .bg-primary   h2, .bg-primary   h3, .bg-primary   h4 { color: var(--color-primary-content);   }
+.bg-secondary h1, .bg-secondary h2, .bg-secondary h3, .bg-secondary h4 { color: var(--color-secondary-content); }
+.bg-accent    h1, .bg-accent    h2, .bg-accent    h3, .bg-accent    h4 { color: var(--color-accent-content);    }
+.bg-neutral   h1, .bg-neutral   h2, .bg-neutral   h3, .bg-neutral   h4 { color: var(--color-neutral-content);   }
 
 /* ─── GibFlow footer ──────────────────────────────────────────────────────────
    Uses .gf-footer (not DaisyUI's .footer) to avoid PaperMod's max-width

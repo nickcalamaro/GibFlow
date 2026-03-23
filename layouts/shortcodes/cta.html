@@ -57,10 +57,9 @@
     </a>
     {{- end }}
     {{- if $btn2 }}
-    {{- /* Ghost outline button — always legible on any brand background */}}
     <a href="{{ $btn2Lnk }}"
-       class="btn btn-lg btn-outline"
-       style="color: var(--color-{{ $variant }}-content); border-color: color-mix(in oklch, var(--color-{{ $variant }}-content) 50%, transparent);">
+       class="btn btn-lg"
+       style="background: rgba(255,255,255,0.12); color: inherit; border: 1px solid rgba(255,255,255,0.45);">
       {{ $btn2 }}
     </a>
     {{- end }}

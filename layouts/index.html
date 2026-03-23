@@ -1,0 +1,19 @@
+{{- /*
+  GibFlow Homepage — full-bleed layout
+  Bypasses PaperMod's `.main { max-width: 720px }` by rendering the page
+  content directly without the `.main` wrapper's width constraint.
+  The shortcodes within _index.md manage their own widths.
+*/ -}}
+{{- define "main" }}
+<div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <img
+    src="/inspiration/GibraltarMainStreet.jpg"
+    class="w-full h-full object-cover opacity-55 pointer-events-none"
+    style="object-position: 50% 80%"
+    alt=""
+  />
+</div>
+<div class="gf-home">
+  {{- .Content }}
+</div>
+{{- end }}
