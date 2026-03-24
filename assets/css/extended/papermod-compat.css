@@ -1,0 +1,12 @@
+/* =============================================================================
+   PaperMod ↔ DaisyUI 5 Compatibility — intentionally empty
+   ============================================================================
+   PaperMod's entire stylesheet is loaded inside @layer papermod (see
+   layouts/partials/head.html). This gives it the lowest CSS priority,
+   so DaisyUI components in higher layers (base, components, utilities)
+   always win automatically. No per-component overrides are needed here.
+
+   This file exists because PaperMod's head.html concatenates every file
+   matching css/extended/*.css into its stylesheet bundle. Removing it
+   would leave only PaperMod's own blank.css placeholder.
+   ============================================================================ */

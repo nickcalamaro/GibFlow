@@ -1,18 +1,21 @@
 {{- /*
   GibFlow Homepage — full-bleed layout
-  Bypasses PaperMod's `.main { max-width: 720px }` by rendering the page
-  content directly without the `.main` wrapper's width constraint.
-  The shortcodes within _index.md manage their own widths.
+  Uses .main:has(.gf-home) in main.css to override PaperMod's
+  .main { max-width: 720px; padding: var(--gap) } — sections go
+  edge-to-edge with their own solid backgrounds.
+  Content within sections is centred via .gf-container (max-width: 1100px).
+
+  hero_image / hero_bg_pos in front matter renders a fixed full-page photo
+  behind everything (z-index: -10). Opaque section backgrounds cover it;
+  the transparent hero section lets it show through with its own overlay.
 */ -}}
 {{- define "main" }}
-<div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
-  <img
-    src="{{ "inspiration/GibraltarMainStreet.jpg" | relURL }}"
-    class="w-full h-full object-cover opacity-55 pointer-events-none"
-    style="object-position: 50% 80%"
-    alt=""
-  />
-</div>
+{{- $img   := .Params.hero_image  | default "" -}}
+{{- $bgPos := .Params.hero_bg_pos | default "center" -}}
+{{- if $img }}
+<div class="fixed inset-0 -z-10" aria-hidden="true"
+  style="background-image: url('{{ $img }}'); background-size: cover; background-position: {{ $bgPos }};"></div>
+{{- end }}
 <div class="gf-home">
   {{- .Content }}
 </div>

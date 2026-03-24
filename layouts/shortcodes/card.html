@@ -4,9 +4,10 @@
 
   Parameters (all optional):
     title       – card heading
-    desc        – short supporting text
+    desc        – short supporting text (alias: content)
     icon        – emoji or short text icon shown before the title
     image       – URL for a top cover image
+    imagealt    – alt text for the image (default: title)
     link        – href for the primary action button
     link_text   – button label (default: "Learn more")
     badge       – badge label (e.g. "New", "Popular")
@@ -34,9 +35,10 @@
   ──────────────────────────────────────────────────────────────────────────── */}}
 
 {{- $title      := .Get "title"       | default "" -}}
-{{- $desc       := .Get "desc"        | default "" -}}
+{{- $desc       := .Get "desc"        | default (.Get "content" | default "") -}}
 {{- $icon       := .Get "icon"        | default "" -}}
 {{- $image      := .Get "image"       | default "" -}}
+{{- $imagealt   := .Get "imagealt"    | default $title -}}
 {{- $link       := .Get "link"        | default "" -}}
 {{- $linkText   := .Get "link_text"   | default "Learn more" -}}
 {{- $badge      := .Get "badge"       | default "" -}}
@@ -52,7 +54,7 @@
 
   {{- if $image }}
   <figure class="overflow-hidden">
-    <img src="{{ $image }}" alt="{{ $title }}" class="w-full object-cover" loading="lazy">
+    <img src="{{ $image }}" alt="{{ $imagealt }}" class="w-full h-48 object-cover" loading="lazy">
   </figure>
   {{- end }}
 

@@ -7,9 +7,9 @@
 <script>
 (function () {
   // ── Scroll-reveal ──────────────────────────────────────────────────────────
-  // Watches every .reveal element; adds .in-view when 10% of it enters
-  // the viewport, then stops observing (animation fires once).
-  var els = document.querySelectorAll('.reveal');
+  // Watches every .reveal and .reveal-stagger element; adds .in-view when
+  // 10% of it enters the viewport, then stops observing (fires once).
+  var els = document.querySelectorAll('.reveal, .reveal-stagger');
   if (!els.length) return;
 
   var io = new IntersectionObserver(

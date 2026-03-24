@@ -1,27 +1,20 @@
 {{- /*
   ─── cta ───────────────────────────────────────────────────────────────────────
-  Full-width call-to-action section with brand background.
+  Full-width call-to-action section.
 
   Parameters:
-    title        – headline text
-    subtitle     – supporting text
-    btn          – primary button label
-    btn_link     – primary button href  (default: "#")
-    btn2         – secondary button label (optional)
-    btn2_link    – secondary button href  (default: "#")
-    variant      – DaisyUI colour token for the background:
-                   primary | secondary | accent | neutral
-                   (default: "primary")
-
-  Inner content (optional) is rendered between subtitle and buttons.
+    title     – headline text
+    subtitle  – supporting paragraph
+    btn       – primary button label
+    btn_link  – primary button href (default: "#")
+    btn2      – secondary button label
+    btn2_link – secondary button href (default: "#")
+    variant   – DaisyUI colour: primary | secondary | accent | neutral (default: "primary")
 
   Usage:
-    {{< cta
-      title     = "Ready to cut your carbon footprint?"
-      subtitle  = "Join 40+ Gibraltar businesses making the switch to sustainable tech."
-      btn       = "Start Free Trial"  btn_link  = "/signup"
-      btn2      = "Talk to Us"        btn2_link = "/contact"
-    >}}
+    hero title="Ready to get started?" subtitle="Join 40+ Gibraltar businesses."
+    btn="Sign Up" btn_link="/signup" btn2="Talk to Us" btn2_link="/contact"
+    variant="primary"
   ──────────────────────────────────────────────────────────────────────────── */}}
 
 {{- $title   := .Get "title"    | default "" -}}
@@ -32,8 +25,9 @@
 {{- $btn2Lnk := .Get "btn2_link"| default "#" -}}
 {{- $variant := .Get "variant"  | default "primary" -}}
 
-<section class="rounded-box bg-{{ $variant }} text-{{ $variant }}-content my-10 px-6 py-14 text-center">
-
+<section class="gf-section bg-base-100">
+<div class="gf-container">
+<div class="rounded-box bg-{{ $variant }} text-{{ $variant }}-content px-6 py-14 text-center">
   {{- if $title }}
   <h2 class="text-3xl md:text-4xl font-bold leading-tight">{{ $title }}</h2>
   {{- end }}
@@ -49,21 +43,19 @@
   {{- if or $btn $btn2 }}
   <div class="mt-8 flex flex-wrap gap-3 justify-center">
     {{- if $btn }}
-    {{- /* Solid inverse button — light surface on brand background */}}
     <a href="{{ $btnLink }}"
-       class="btn btn-lg font-semibold"
-       style="background-color: var(--color-base-100); color: var(--color-{{ $variant }}); border: none;">
+       class="btn btn-lg btn-neutral font-semibold">
       {{ $btn }}
     </a>
     {{- end }}
     {{- if $btn2 }}
     <a href="{{ $btn2Lnk }}"
-       class="btn btn-lg"
-       style="background: rgba(255,255,255,0.12); color: inherit; border: 1px solid rgba(255,255,255,0.45);">
+       class="btn btn-lg btn-ghost border border-{{ $variant }}-content/45 text-{{ $variant }}-content hover:bg-{{ $variant }}-content/10">
       {{ $btn2 }}
     </a>
     {{- end }}
   </div>
   {{- end }}
-
+</div>
+</div>
 </section>

@@ -17,18 +17,19 @@ Do NOT use Tailwind opacity utilities like `bg-white/85` for section backgrounds
 Those require the scanner to have seen the exact string in a source file first —
 if the class is new, it silently generates nothing.
 
-### The only safe pattern for one-off colours is an inline style.
-If a colour or opacity isn't covered by a DaisyUI token AND isn't already
-used somewhere Tailwind will scan, use `style="..."` directly on the element.
-Examples that already exist: `object-position`, `text-shadow`, button overrides
-in `cta.html`. Use `rgba()` — not `oklch()` with `/` opacity syntax.
+### Inline styles are only for dynamic or one-off values.
+Use `style="..."` only for values Hugo generates dynamically (e.g.
+`background-image: url(...)`) or truly one-off positioning (`object-position`).
+Never use inline styles for colours — use DaisyUI semantic tokens instead.
 
 ### Use Tailwind utilities for everything else. No custom CSS.
 Put utility classes directly in the HTML. Custom CSS in `main.css` is only
 acceptable for:
 - Structural wrappers (`.gf-home`, `.gf-container`, `.gf-section`) — things
   that apply to every section and would be noisy to repeat everywhere
-- Cascade conflict fixes (see PaperMod section below)
+- Scroll-reveal animation definitions (`.reveal`, `.reveal-stagger`)
+- Unlayered overrides for PaperMod body background and heading colours
+  inside coloured sections (see PaperMod section below)
 
 If a feature requires something Tailwind/DaisyUI doesn't provide, find and
 install a library. Do not write custom CSS to fill the gap.
@@ -63,44 +64,77 @@ DaisyUI semantic tokens (`bg-base-100`, `text-primary`, etc.) respond to
 
 ```
 layouts/index.html          Full-bleed homepage override
-  └─ <div class="fixed inset-0 -z-10">   Background image (not a CSS rule)
-  └─ <div class="gf-home">               Negates PaperMod's .main padding
+  └─ <div class="gf-home">               Triggers .main:has(.gf-home) override
 
 content/_index.md           Page content — sections in this order:
-  1. {{< hero >}}            DaisyUI hero + overlay + scroll hint
+  1. {{< hero >}}            DaisyUI hero + own background image + overlay
   2. .gf-trustbar            Stats bar (bg-primary)
-  3–8. .gf-section           Alternating bg-base-100 / bg-base-200
+  3–8. .gf-section           Full-width alternating bg-base-100 / bg-base-200
   9. .bg-primary             Early access form
   10. .gf-section bg-base-100  For businesses
-  11. {{< cta >}}            Final CTA strip
+  11. {{< cta >}}            Contained card (bg-primary) inside gf-section
 ```
 
 **Custom CSS classes** (all in `main.css`, minimal on purpose):
-- `.gf-home` — negates PaperMod's `.main` padding-inline
+- `.main:has(.gf-home)` — overrides PaperMod's `.main` max-width and padding
+- `.gf-home` — homepage content wrapper (width: 100%)
 - `.gf-container` — max-width 1100px, centred, with padding
 - `.gf-section` — `padding-block: 5rem` only; background set in HTML
 - `.gf-trustbar` — `bg-primary` + `padding-block: 3rem`
 - `.gf-footer` — avoids PaperMod's `.footer` max-width constraint
 - `.reveal` / `.reveal-stagger` — scroll-triggered fade-in animations
 
----
-
-## PaperMod Cascade Conflicts
-PaperMod's `reset.css` declares **unlayered** CSS that overwrites DaisyUI's `@layer` rules:
-- `body { background: var(--theme) }` — covers any body background we set
-- `body.list { background: var(--code-bg) }` — applied to the homepage specifically
-- `button, input, textarea { padding: 0; background: 0 0; border: 0 }` — wipes DaisyUI
-- `a, button, h1-h6 { color: var(--primary) }` — near-black in light mode
-
-**Fix pattern**: Write unlayered class selectors in `main.css`. Class specificity (0,1,0)
-beats PaperMod's tag selectors (0,0,1) on the same cascade layer.
-
-**Do not fight the cascade on `body`.**  PaperMod always wins `body {}` because it
-loads first with equal specificity. Put full-page backgrounds on a
+**Do not fight the cascade on `body`.**  Put full-page backgrounds on a
 `fixed inset-0 -z-10` child element inside the layout instead.
 
-**Homepage background fix**: `body.list { background: transparent }` at specificity
-(0,1,1) beats `.list { background: var(--code-bg) }` at (0,1,0).
+---
+
+## PaperMod ↔ DaisyUI: Layer Architecture
+PaperMod's `reset.css` declares aggressive resets (`button { padding: 0 }`,
+`h1-h6 { color: var(--primary) }`, etc.) that would normally beat DaisyUI's
+`@layer` rules because unlayered CSS always wins over layered CSS.
+
+**Fix: `layouts/partials/head.html`** (project-level override of PaperMod's)
+loads PaperMod's entire stylesheet inside `@layer papermod` via
+`@import url("...") layer(papermod)`. A `@layer` declaration in the same
+`<style>` tag pre-declares the full layer order for the entire document
+(CSS layers are ordered by first encounter, so this MUST come before
+both the `@import` and the main.css `<link>`):
+
+```
+@layer theme      →  lowest   (Tailwind design tokens)
+@layer base       →           (Tailwind preflight — *, body resets)
+@layer papermod   →           (PaperMod layout, nav, typography, resets)
+@layer components →           (DaisyUI buttons, badges, inputs …)
+@layer utilities  →           (Tailwind utilities)
+(unlayered)       →  highest  (our overrides in main.css)
+```
+
+PaperMod sits between `base` and `components`. Its layout rules (`.main`,
+`.header`, `.nav`) beat Tailwind's preflight resets. DaisyUI's component
+rules (`.btn`, `.badge`, `.input`) beat PaperMod's element-level resets.
+No per-component workarounds needed.
+
+**Unlayered overrides in `main.css`:**
+- `:root { --border: 1px }` — **critical.** PaperMod's theme-vars.css defines
+  `--border: rgb(238,238,238)` (a divider colour) in `@layer papermod`. DaisyUI
+  uses `--border` as a LENGTH (1px) for border widths and `padding-inline` calc
+  expressions. Because `papermod > base`, PaperMod's colour value wins and breaks
+  every DaisyUI component that uses `var(--border)` in a calc (badges, inputs,
+  checkboxes, etc.). This unlayered rule restores the correct length value.
+- `body, body.list { background: transparent }` — PaperMod's body background
+  is the only rule (Tailwind preflight doesn't set one), so we override it.
+- `.badge { line-height: 1 }` — PaperMod's `body { line-height: 1.6 }` inherits
+  into badges (DaisyUI doesn't set line-height on them), inflating the text
+  beyond the badge's fixed height.
+- `.bg-primary h1, …h6 { color: var(--color-primary-content) }` (and secondary,
+  accent, neutral) — PaperMod's heading colour is an explicit declaration on the
+  element, which beats inherited text colour from a parent. These ensure headings
+  in coloured sections display correctly.
+
+**`assets/css/extended/papermod-compat.css`** is intentionally empty. PaperMod
+concatenates `css/extended/*.css` into its stylesheet bundle; the file exists
+as a placeholder. Do not add workarounds there.
 
 ---
 

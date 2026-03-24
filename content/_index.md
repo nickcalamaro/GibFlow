@@ -6,6 +6,9 @@ date: 2026-03-22
 hideMeta: true
 hideSummary: true
 searchHidden: true
+params:
+  hero_image: "/inspiration/GibraltarMainStreet.jpg"
+  hero_bg_pos: "50% 80%"
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -109,28 +112,35 @@ Some grew up here. Some flew in this morning. Some are off a cruise ship for fou
 </p>
 </div>
 
-<div class="grid sm:grid-cols-3 gap-6 reveal-stagger">
-{{< card
-title    = "Visitors"
-badge    = "Short-stay"
-content  = "Step off the plane or cruise ship and get your bearings fast. Bus stops, taxis, ATMs, beaches. The stuff that takes locals years to figure out is visible within seconds."
-image    = "/inspiration/GibFlowPersonWalking.jpg"
-imagealt = "Person walking through Gibraltar"
->}}{{< /card >}}
-{{< card
-title    = "Residents"
-badge    = "Daily users"
-content  = "You know the Rock. But when the bus is running late or your usual parking spot is gone, time matters. GibFlow gives you live bus positions, cycle routes and parking before you leave the house."
-image    = "/inspiration/GibraltarBus.jpg"
-imagealt = "Gibraltar public bus"
->}}{{< /card >}}
-{{< card
-title    = "Local Businesses"
-badge    = "Partners"
-content  = "When someone searches for lunch near the waterfront, you want to come up first. GibFlow puts local businesses in front of residents and visitors based on proximity, not paid placement."
-image    = "/inspiration/GibFlowMapView.jpg"
-imagealt = "Map view of Gibraltar"
->}}{{< /card >}}
+<div class="grid sm:grid-cols-3 gap-5 reveal-stagger">
+
+<div class="photo-card">
+  <img src="/inspiration/GibFlowPersonWalking.jpg" alt="Person walking through Gibraltar" class="photo-card-img" loading="lazy">
+  <div class="photo-card-overlay"></div>
+  <div class="photo-card-content">
+    <h3 class="text-xl font-bold text-neutral-content">Visitors</h3>
+    <p class="text-sm text-neutral-content/80 leading-relaxed" style="margin-top:0.5rem">Off the plane or cruise ship? Bus stops, ATMs, beaches — sorted by where you are, visible in seconds.</p>
+  </div>
+</div>
+
+<div class="photo-card">
+  <img src="/inspiration/GibraltarBus.jpg" alt="Gibraltar public bus" class="photo-card-img" loading="lazy">
+  <div class="photo-card-overlay"></div>
+  <div class="photo-card-content">
+    <h3 class="text-xl font-bold text-neutral-content">Residents</h3>
+    <p class="text-sm text-neutral-content/80 leading-relaxed" style="margin-top:0.5rem">Live bus positions, free bike parks, parking — checked before you leave the house. Works when Gibraltar has other plans.</p>
+  </div>
+</div>
+
+<div class="photo-card">
+  <img src="/inspiration/GibFlowMapView.jpg" alt="Map view of Gibraltar" class="photo-card-img" loading="lazy">
+  <div class="photo-card-overlay"></div>
+  <div class="photo-card-content">
+    <h3 class="text-xl font-bold text-neutral-content">Local Businesses</h3>
+    <p class="text-sm text-neutral-content/80 leading-relaxed" style="margin-top:0.5rem">Shown to people nearby, right now. Not paid placement — proximity. 28,000 people cross the border daily.</p>
+  </div>
+</div>
+
 </div>
 </div>
 </section>
@@ -220,22 +230,22 @@ GibFlow supports Gibraltar's sustainability targets by making public transport a
 </p>
 
 <div class="grid grid-cols-2 gap-4 mt-8 reveal-stagger">
-<div class="bg-base-200 rounded-box p-4">
+<div class="bg-base-100 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Up</div>
 <div class="text-sm font-semibold mt-1">Public transport use</div>
 <div class="text-xs text-base-content/60 mt-1">More bus and walking trips, fewer private cars</div>
 </div>
-<div class="bg-base-200 rounded-box p-4">
+<div class="bg-base-100 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Down</div>
 <div class="text-sm font-semibold mt-1">City congestion</div>
 <div class="text-xs text-base-content/60 mt-1">Smarter routing spreads demand across all routes</div>
 </div>
-<div class="bg-base-200 rounded-box p-4">
+<div class="bg-base-100 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Better</div>
 <div class="text-sm font-semibold mt-1">Visitor experience</div>
 <div class="text-xs text-base-content/60 mt-1">Tourists navigate with confidence from the moment they arrive</div>
 </div>
-<div class="bg-base-200 rounded-box p-4">
+<div class="bg-base-100 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Aligned</div>
 <div class="text-sm font-semibold mt-1">Smart-city goals</div>
 <div class="text-xs text-base-content/60 mt-1">Supports Gibraltar's digital transformation targets</div>
