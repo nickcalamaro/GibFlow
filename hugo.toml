@@ -61,6 +61,37 @@ enableRobotsTXT = true
     url        = '/#early-access'
     weight     = 40
 
+# ── Footer columns ────────────────────────────────────────────────────────────
+# Drives the link columns in layouts/partials/footer.html.
+# Three columns: navigation, legal, and support.
+[params.footer]
+  [params.footer.brand]
+    tagline = "Gibraltar's smart mobility app — real-time bus info, secure cycle parking, and local navigation in one place."
+
+[[params.footer.columns]]
+  title = "Navigate"
+  links = [
+    {label = "Home",             url = "/"},
+    {label = "Features",         url = "/#features"},
+    {label = "For Businesses",   url = "/#for-businesses"},
+    {label = "Get Early Access", url = "/#early-access"},
+  ]
+
+[[params.footer.columns]]
+  title = "Legal"
+  links = [
+    {label = "Privacy Policy",    url = "/privacy/"},
+    {label = "Terms & Conditions", url = "/terms/"},
+    {label = "Cookie Policy",     url = "/cookies/"},
+  ]
+
+[[params.footer.columns]]
+  title = "Support"
+  links = [
+    {label = "Help Centre", url = "/help/"},
+    {label = "Contact Us",  url = "mailto:info@gibflow.gi"},
+  ]
+
 [build]
   writeStats = true
 
