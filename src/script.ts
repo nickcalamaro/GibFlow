@@ -8,7 +8,7 @@
  *   OPTIONS *         → CORS preflight
  *
  * Environment variables (set in Bunny dashboard → Env Configuration):
- *   SMTP2GO_API_KEY              (secret)
+ *   smtp2go-apikey               (secret)
  *
  * Optional — only needed if you enable the database subscriber store:
  *   BUNNY_DATABASE_URL           (variable — auto-injected if DB is linked)
@@ -144,9 +144,9 @@ async function handleContact(request: Request, origin: string): Promise<Response
     return jsonResp(400, { ok: false, error: "Message is too short." }, origin);
   }
 
-  const smtp2goKey = process.env.SMTP2GO_API_KEY;
+  const smtp2goKey = process.env["smtp2go-apikey"];
   if (!smtp2goKey) {
-    console.error("[GibFlow] SMTP2GO_API_KEY not found in environment");
+    console.error("[GibFlow] smtp2go-apikey secret not found in environment");
     return jsonResp(500, { ok: false, error: "Server configuration error." }, origin);
   }
 
@@ -258,9 +258,9 @@ async function handlePartner(request: Request, origin: string): Promise<Response
     return jsonResp(400, { ok: false, error: "Message is too short." }, origin);
   }
 
-  const smtp2goKey = process.env.SMTP2GO_API_KEY;
+  const smtp2goKey = process.env["smtp2go-apikey"];
   if (!smtp2goKey) {
-    console.error("[GibFlow] SMTP2GO_API_KEY not found in environment");
+    console.error("[GibFlow] smtp2go-apikey secret not found in environment");
     return jsonResp(500, { ok: false, error: "Server configuration error." }, origin);
   }
 
@@ -375,11 +375,11 @@ async function handleSubscribe(request: Request, origin: string): Promise<Respon
     return jsonResp(400, { ok: false, error: "You must agree to the Privacy Policy to sign up." }, origin);
   }
 
-  const smtp2goKey = process.env.SMTP2GO_API_KEY;
+  const smtp2goKey = process.env["smtp2go-apikey"];
   const ts = new Date().toISOString();
 
   if (!smtp2goKey) {
-    console.error("[GibFlow] SMTP2GO_API_KEY not found");
+    console.error("[GibFlow] smtp2go-apikey secret not found");
     return jsonResp(500, { ok: false, error: "Server configuration error." }, origin);
   }
 

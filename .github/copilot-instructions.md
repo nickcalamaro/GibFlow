@@ -153,3 +153,91 @@ as a placeholder. Do not add workarounds there.
 - Vary sentence length. Short sentences are fine. So are longer ones where needed.
 - Write as if a local Gibraltar founder wrote it — direct, specific, not corporate.
 - Avoid adverb-heavy phrasing: "incredibly," "seamlessly," "effortlessly."
+
+---
+
+## Bunny Edge Scripting (`src/script.ts`)
+
+The GibFlow backend runs as a **Bunny Edge Script** (standalone type).
+The script is deployed via GitHub Actions (`.github/workflows/release-on-bunny.yml`)
+which pushes `src/script.ts` directly to Bunny script ID 69384.
+
+### Runtime
+Bunny Edge Scripting runs on **Deno + V8**, not Node.js and not Cloudflare Workers.
+Do NOT use Cloudflare patterns like `addEventListener('fetch', ...)` or
+`export default { fetch() }`. The correct entry point is:
+
+```ts
+import * as BunnySDK from "@bunny.net/edgescript-sdk";
+
+BunnySDK.net.http.serve(async (request: Request): Promise<Response> => {
+  // handle request, return Response
+});
+```
+
+### Environment variables and secrets
+Access via the Node.js compat layer or Deno.env:
+
+```ts
+import process from "node:process";
+const apiKey = process.env["smtp2go-apikey"];
+// or: const apiKey = Deno.env.get("smtp2go-apikey");
+```
+
+Variables and secrets are configured in the Bunny dashboard under
+Edge Platform > Scripting > (select script) > Env Configuration.
+Variable and secret names must be unique across both categories.
+
+### Database
+Bunny provides a libSQL-compatible database. When a database is linked to a
+script, `BUNNY_DATABASE_URL` and `BUNNY_DATABASE_AUTH_TOKEN` are auto-injected.
+Use the `@libsql/client` from esm.sh:
+
+```ts
+import { createClient } from "https://esm.sh/@libsql/client@0.6.0/web";
+import process from "node:process";
+
+const db = createClient({
+  url: process.env.BUNNY_DATABASE_URL,
+  authToken: process.env.BUNNY_DATABASE_AUTH_TOKEN,
+});
+```
+
+Do NOT use raw `fetch()` calls to Bunny Storage URLs from within an edge script.
+Subrequests that route back through the same pull zone cause a **508 Loop Detected**
+error. Always use the libSQL client for database operations.
+
+### Deployment
+The workflow deploys the `.ts` file directly. Bunny's Deno runtime handles
+TypeScript natively. No build step (esbuild, tsc, etc.) is needed.
+
+```yaml
+# .github/workflows/release-on-bunny.yml
+- name: Publish the script to Bunny
+  uses: "BunnyWay/actions/deploy-script@main"
+  with:
+    script_id: 69384
+    file: "src/script.ts"
+```
+
+The action authenticates via GitHub OIDC (`permissions: id-token: write`).
+The repository must be linked to the Bunny script in the dashboard for this
+to work. Alternatively, pass a `deploy_key` or `api_key` input.
+
+### Local development
+Run locally with Deno:
+
+```bash
+deno run -A src/script.ts
+```
+
+### Current routes
+- `POST /`           -- contact form (sends email via SMTP2GO)
+- `POST /subscribe`  -- newsletter signup (stores in DB, sends welcome + notification emails)
+- `POST /partner`    -- business enquiry (sends email via SMTP2GO)
+- `OPTIONS *`        -- CORS preflight
+
+### CORS
+Allowed origins: `https://gibflow.gi`, `https://www.gibflow.gi`, `http://localhost:1313`.
+The `OPTIONS` handler returns `204` with the correct `Access-Control-Allow-Origin` header.
+All JSON responses also include CORS headers.
