@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "hugo server --disableFastRender",
-    "build": "esbuild src/contact-edge.js --bundle --platform=neutral --target=es2020 --outfile=dist/index.js",
+    "build": "echo 'script.ts is deployed directly to Bunny — no local build needed'",
     "build:site": "hugo --minify",
     "css:build": "postcss assets/css/main.css -o assets/css/dist/main.css"
   },
