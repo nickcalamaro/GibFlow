@@ -24,7 +24,7 @@ subtitle   = "Track live buses, find free bike parking, and discover what's near
 cta        = "Get Early Access"
 cta_link   = "#early-access"
 cta2       = "For Businesses"
-cta2_link  = "/work-with-us/"
+cta2_link  = "#for-businesses"
 min_height = "min-h-[90vh]"
 full_bleed = "true"
 >}}{{< /hero >}}
