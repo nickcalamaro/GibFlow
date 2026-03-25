@@ -188,6 +188,11 @@ Variables and secrets are configured in the Bunny dashboard under
 Edge Platform > Scripting > (select script) > Env Configuration.
 Variable and secret names must be unique across both categories.
 
+Current environment configuration:
+- `smtp2go-apikey` (secret) — SMTP2GO API key
+- `gib-flow-database-url` (variable) — libSQL database URL
+- `gibflow-database-full-access-token` (secret) — libSQL auth token
+
 ### Database
 Bunny provides a libSQL-compatible database. When a database is linked to a
 script, `BUNNY_DATABASE_URL` and `BUNNY_DATABASE_AUTH_TOKEN` are auto-injected.

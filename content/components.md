@@ -225,30 +225,6 @@ From discovery to launch in six weeks. The new platform is faster, more accessib
 
 ---
 
-### Accordion
-
-DaisyUI `collapse` components inside a `join` container.
-
-{{< accordion >}}
-
-{{< accordion-item title="What does 'eco-conscious' mean for a digital agency?" open="true" >}}
-We measure and offset the carbon footprint of every server, deployment pipeline, and developer workstation. We also prioritise lightweight, efficient code and choose renewable-energy infrastructure wherever possible.
-{{< /accordion-item >}}
-
-{{< accordion-item title="Do you work with clients outside Gibraltar?" >}}
-Yes. We work with clients across the EU, UK, and beyond. Our distributed team covers CET and GMT time zones, and all project management is fully async-friendly.
-{{< /accordion-item >}}
-
-{{< accordion-item title="Which technologies do you use?" >}}
-Our current stack centres on Hugo, Tailwind CSS 4, DaisyUI 5, and modern JavaScript. For back-end work we favour Go and Node.js, deployed on zero-emissions cloud infrastructure.
-{{< /accordion-item >}}
-
-{{< accordion-item title="How do I get a quote?" >}}
-Fill in our contact form or email us at hello@gibflow.gi. We respond within one business day with an outline proposal.
-{{< /accordion-item >}}
-
-{{< /accordion >}}
-
 ---
 
 ### Scroll Reveal

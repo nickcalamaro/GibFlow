@@ -1,29 +1,28 @@
 {{- /*
   partner-form — business listing / partnership enquiry form
   Submits via fetch() to site.Params.contactFormEndpoint + /partner.
-  Hugo template vars resolved here (layout context), not in content .md files.
+  Follows the same pattern as early-access.html.
 */ -}}
 {{- $endpoint := site.Params.contactFormEndpoint | default "" -}}
-{{- $formID   := printf "gf-partner-%s" (now.UnixNano | string) -}}
 
 <div class="reveal card bg-base-100 border border-base-200 shadow-sm max-w-2xl mx-auto my-8">
   <div class="card-body gap-4">
 
     <h2 class="card-title text-2xl text-base-content">Get in touch</h2>
     <p class="text-base-content/60 text-sm -mt-2">
-      We respond within one business day. The more detail you give us, the more useful our reply will be.
+      We respond as soon as possible. The more detail you give us, the more useful our reply will be.
     </p>
 
-    <div id="{{ $formID }}-error" role="alert" class="alert alert-error hidden">
+    <div id="pf-error" role="alert" class="alert alert-error hidden">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="none"
            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round"
               d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
       </svg>
-      <span id="{{ $formID }}-error-msg"></span>
+      <span id="pf-error-msg"></span>
     </div>
 
-    <div id="{{ $formID }}-success" class="hidden text-center py-8">
+    <div id="pf-success" class="hidden text-center py-8">
       <div class="flex flex-col items-center gap-3">
         <div class="rounded-full bg-success/15 p-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-success" fill="none"
@@ -33,14 +32,13 @@
         </div>
         <h3 class="text-lg font-semibold text-base-content">Enquiry received</h3>
         <p class="text-sm text-base-content/60 max-w-xs">
-          We'll review your message and get back to you within one business day.
+          We'll review your message and get back to you as soon as possible.
         </p>
       </div>
     </div>
 
-    <form id="{{ $formID }}" class="flex flex-col gap-3" data-endpoint="{{ $endpoint }}">
+    <form id="pf-form" class="flex flex-col gap-3" data-endpoint="{{ $endpoint }}" novalidate>
 
-      {{- /* Honeypot */}}
       <input type="text" name="bot" tabindex="-1" autocomplete="off"
              aria-hidden="true" style="display:none" />
 
@@ -96,7 +94,7 @@
       </fieldset>
 
       <div class="card-actions justify-end mt-2">
-        <button type="submit" id="{{ $formID }}-btn" class="btn btn-primary">
+        <button type="submit" id="pf-btn" class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
                aria-hidden="true">
@@ -113,18 +111,19 @@
 
 <script>
 (function () {
-  var form     = document.getElementById({{ printf "%s" $formID | jsonify }});
+  var form     = document.getElementById('pf-form');
   var endpoint = form ? (form.dataset.endpoint || '') : '';
-  var btn      = document.getElementById({{ printf "%s-btn" $formID | jsonify }});
-  var errBox   = document.getElementById({{ printf "%s-error" $formID | jsonify }});
-  var errMsg   = document.getElementById({{ printf "%s-error-msg" $formID | jsonify }});
-  var success  = document.getElementById({{ printf "%s-success" $formID | jsonify }});
+  var btn      = document.getElementById('pf-btn');
+  var errBox   = document.getElementById('pf-error');
+  var errMsg   = document.getElementById('pf-error-msg');
+  var success  = document.getElementById('pf-success');
 
   if (!form) return;
 
   function showError(msg) {
     errMsg.textContent = msg;
     errBox.classList.remove('hidden');
+    errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function hideError() {
@@ -136,7 +135,6 @@
     e.preventDefault();
     hideError();
 
-    // Let the browser validate required fields
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -147,18 +145,12 @@
       return;
     }
 
-    var nameField     = form.querySelector('[name="name"]');
-    var emailField    = form.querySelector('[name="email"]');
-    var businessField = form.querySelector('[name="business"]');
-    var messageField  = form.querySelector('[name="message"]');
-    var botField      = form.querySelector('[name="bot"]');
-
     var data = {
-      name:     nameField.value.trim(),
-      email:    emailField.value.trim(),
-      business: businessField.value.trim(),
-      message:  messageField.value.trim(),
-      bot:      botField ? botField.value : '',
+      name:     form.elements.name.value.trim(),
+      email:    form.elements.email.value.trim(),
+      business: form.elements.business.value.trim(),
+      message:  form.elements.message.value.trim(),
+      bot:      form.elements.bot ? form.elements.bot.value : '',
     };
 
     btn.disabled = true;

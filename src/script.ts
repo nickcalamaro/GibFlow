@@ -10,9 +10,9 @@
  * Environment variables (set in Bunny dashboard → Env Configuration):
  *   smtp2go-apikey               (secret)
  *
- * Optional — only needed if you enable the database subscriber store:
- *   BUNNY_DATABASE_URL           (variable — auto-injected if DB is linked)
- *   BUNNY_DATABASE_AUTH_TOKEN    (variable — auto-injected if DB is linked)
+ * Database:
+ *   gib-flow-database-url                  (variable)
+ *   gibflow-database-full-access-token     (secret)
  *
  * CORS origins allowed:
  *   https://gibflow.gi
@@ -63,8 +63,8 @@ let db: ReturnType<typeof import("https://esm.sh/@libsql/client@0.6.0/web").crea
 
 async function getDb() {
   if (db) return db;
-  const url = process.env.BUNNY_DATABASE_URL;
-  const authToken = process.env.BUNNY_DATABASE_AUTH_TOKEN;
+  const url = process.env["gib-flow-database-url"];
+  const authToken = process.env["gibflow-database-full-access-token"];
   if (!url || !authToken) return null;
 
   const { createClient } = await import("https://esm.sh/@libsql/client@0.6.0/web");
