@@ -11,7 +11,6 @@ keywords: ["contact GibFlow", "GibFlow support", "Gibraltar mobility app contact
 
 {{< contact-form
   title    = "Send us a message"
-  subtitle = "Fill in the form and we will get back to you within one business day."
   provider = "bunny"
 >}}
 

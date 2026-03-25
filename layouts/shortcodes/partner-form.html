@@ -1,0 +1,185 @@
+{{- /*
+  partner-form — business listing / partnership enquiry form
+  Submits via fetch() to site.Params.contactFormEndpoint + /partner.
+  Hugo template vars resolved here (layout context), not in content .md files.
+*/ -}}
+{{- $endpoint := site.Params.contactFormEndpoint | default "" -}}
+{{- $formID   := printf "gf-partner-%s" (now.UnixNano | string) -}}
+
+<div class="reveal card bg-base-100 border border-base-200 shadow-sm max-w-2xl mx-auto my-8">
+  <div class="card-body gap-4">
+
+    <h2 class="card-title text-2xl text-base-content">Get in touch</h2>
+    <p class="text-base-content/60 text-sm -mt-2">
+      We respond within one business day. The more detail you give us, the more useful our reply will be.
+    </p>
+
+    <div id="{{ $formID }}-error" role="alert" class="alert alert-error hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      </svg>
+      <span id="{{ $formID }}-error-msg"></span>
+    </div>
+
+    <div id="{{ $formID }}-success" class="hidden text-center py-8">
+      <div class="flex flex-col items-center gap-3">
+        <div class="rounded-full bg-success/15 p-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-success" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-base-content">Enquiry received</h3>
+        <p class="text-sm text-base-content/60 max-w-xs">
+          We'll review your message and get back to you within one business day.
+        </p>
+      </div>
+    </div>
+
+    <form id="{{ $formID }}" class="flex flex-col gap-3" novalidate>
+
+      {{- /* Honeypot */}}
+      <input type="text" name="bot" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="display:none" />
+
+      <div class="grid sm:grid-cols-2 gap-3">
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend">
+            Your Name <span class="text-error ml-0.5" aria-hidden="true">*</span>
+          </legend>
+          <input type="text" name="name" placeholder="Jane Smith"
+                 required autocomplete="name" class="input w-full validator" />
+        </fieldset>
+
+        <fieldset class="fieldset w-full">
+          <legend class="fieldset-legend">
+            Email Address <span class="text-error ml-0.5" aria-hidden="true">*</span>
+          </legend>
+          <input type="email" name="email" placeholder="jane@example.com"
+                 required autocomplete="email" class="input w-full validator" />
+        </fieldset>
+      </div>
+
+      <fieldset class="fieldset w-full">
+        <legend class="fieldset-legend">
+          Business Name <span class="text-error ml-0.5" aria-hidden="true">*</span>
+        </legend>
+        <input type="text" name="business" placeholder="Your business name"
+               required autocomplete="organization" class="input w-full validator" />
+      </fieldset>
+
+      <fieldset class="fieldset w-full">
+        <legend class="fieldset-legend">
+          Tell us about your business and what you have in mind
+          <span class="text-error ml-0.5" aria-hidden="true">*</span>
+        </legend>
+        <textarea name="message"
+                  placeholder="What kind of business are you running, where are you based, and what are you looking to do with GibFlow?"
+                  rows="6" required class="textarea w-full validator"></textarea>
+        <p class="label text-xs text-base-content/55 mt-1">
+          We typically respond within one business day.
+        </p>
+      </fieldset>
+
+      <fieldset class="fieldset w-full">
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox" name="consent" required
+                 class="checkbox checkbox-primary mt-0.5 validator" />
+          <span class="text-sm text-base-content/70 leading-snug">
+            I agree to the
+            <a href="/privacy/" class="link link-primary">Privacy Policy</a>
+            and consent to GibFlow processing my data to respond to this enquiry.
+            <span class="text-error ml-0.5" aria-hidden="true">*</span>
+          </span>
+        </label>
+      </fieldset>
+
+      <div class="card-actions justify-end mt-2">
+        <button type="submit" id="{{ $formID }}-btn" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
+               fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+               aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Send Enquiry
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var endpoint = {{ $endpoint | jsonify }};
+  var form     = document.getElementById({{ printf "%s" $formID | jsonify }});
+  var btn      = document.getElementById({{ printf "%s-btn" $formID | jsonify }});
+  var errBox   = document.getElementById({{ printf "%s-error" $formID | jsonify }});
+  var errMsg   = document.getElementById({{ printf "%s-error-msg" $formID | jsonify }});
+  var success  = document.getElementById({{ printf "%s-success" $formID | jsonify }});
+
+  if (!form) return;
+
+  function showError(msg) {
+    errMsg.textContent = msg;
+    errBox.classList.remove('hidden');
+    errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function hideError() {
+    errBox.classList.add('hidden');
+    errMsg.textContent = '';
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideError();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (!endpoint) {
+      showError('The form is not yet configured. Please email info@gibflow.gi directly.');
+      return;
+    }
+
+    var data = {
+      name:     form.name.value.trim(),
+      email:    form.email.value.trim(),
+      business: form.business.value.trim(),
+      message:  form.message.value.trim(),
+      bot:      form.bot ? form.bot.value : '',
+    };
+
+    btn.disabled = true;
+    btn.classList.add('loading');
+
+    try {
+      var res  = await fetch(endpoint.replace(/\/+$/, '') + '/partner', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+      var json = await res.json().catch(function () { return {}; });
+
+      if (res.ok && json.ok) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else {
+        showError(json.error || 'Something went wrong. Please try again or email info@gibflow.gi.');
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
+    } catch (err) {
+      showError('Could not reach the server. Please check your connection or email info@gibflow.gi.');
+      btn.disabled = false;
+      btn.classList.remove('loading');
+    }
+  });
+})();
+</script>

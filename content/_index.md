@@ -327,7 +327,7 @@ GibFlow is taking early business listings ahead of the public launch. Your busin
 </ul>
 
 <div class="mt-10">
-<a href="/contact/" class="btn btn-secondary btn-lg">Contact Us About a Listing</a>
+<a href="/work-with-us/" class="btn btn-secondary btn-lg">Work With Us</a>
 </div>
 </div>
 
@@ -353,7 +353,7 @@ title     = "Ready to go?"
 subtitle  = "This won't just launch. It'll embed itself into how Gibraltar flows. Sign up for early access, or talk to us about getting your business listed."
 btn       = "Get Early Access"
 btn_link  = "#early-access"
-btn2      = "Business Listings"
-btn2_link = "#for-businesses"
+btn2      = "Work With Us"
+btn2_link = "/work-with-us/"
 variant   = "primary"
 >}}{{< /cta >}}

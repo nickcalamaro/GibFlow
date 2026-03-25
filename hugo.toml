@@ -79,6 +79,7 @@ enableRobotsTXT = true
     {label = "Home",             url = "/"},
     {label = "Features",         url = "/#features"},
     {label = "For Businesses",   url = "/#for-businesses"},
+    {label = "Work With Us",     url = "/work-with-us/"},
     {label = "Get Early Access", url = "/#early-access"},
   ]
 
