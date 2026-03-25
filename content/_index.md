@@ -272,37 +272,148 @@ EARLY ACCESS
 ════════════════════════════════════════════════════════════ -->
 <section class="py-24 px-6 bg-primary" id="early-access">
 <div class="max-w-xl mx-auto text-center">
-<span class="badge badge-neutral mb-6">Coming Soon</span>
-<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Want to be first?</h2>
+<span class="badge badge-neutral mb-6">Stay Updated</span>
+<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Keep up with GibFlow</h2>
 <p class="mt-4 text-lg text-primary-content/80 leading-relaxed">
-GibFlow is heading to iOS and Android. Leave your email and we'll send one message when the app goes live. No newsletters, no follow-up sequences.
+GibFlow is heading to iOS and Android. Sign up to stay in the loop on the launch, new features as they roll out, and updates on what's coming for transport and mobility in Gibraltar. We send emails when there's something worth telling you.
 </p>
-<p class="mt-2 text-sm text-primary-content/60">One-off download at launch. No subscription required.</p>
+<p class="mt-2 text-sm text-primary-content/60">No spam. Unsubscribe any time by replying to any email.</p>
 
-<form class="mt-10"
-name="early-access"
-method="POST"
-data-netlify="true"
-data-netlify-honeypot="bot-field">
-<input type="hidden" name="form-name" value="early-access" />
-<input type="text" name="bot-field" style="display:none" aria-hidden="true" />
-<div class="join w-full max-w-md mx-auto">
-<input
-type="email"
-name="email"
-placeholder="your@email.com"
-required
-aria-label="Your email address"
-class="input join-item flex-1 min-w-0"
-/>
-<button type="submit" class="btn btn-neutral join-item">
-Notify Me
-</button>
+<div id="ea-error" role="alert"
+     class="alert alert-error mt-6 hidden text-left">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="none"
+       viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+  </svg>
+  <span id="ea-error-msg"></span>
 </div>
-<p class="text-xs mt-3 text-primary-content/50">No spam. One email when the app launches.</p>
+
+<div id="ea-success" class="hidden mt-8">
+  <div class="flex flex-col items-center gap-3">
+    <div class="rounded-full bg-primary-content/15 p-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-content" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <p class="text-primary-content font-semibold text-lg">You're on the list.</p>
+    <p class="text-primary-content/70 text-sm">Check your inbox for a confirmation email. We'll be in touch when there's news.</p>
+  </div>
+</div>
+
+<form id="ea-form" class="mt-8" novalidate>
+  <input type="text" name="bot" tabindex="-1" autocomplete="off"
+         aria-hidden="true" style="display:none" />
+  <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+    <input
+      type="text"
+      name="name"
+      placeholder="Your name"
+      required
+      autocomplete="name"
+      aria-label="Your name"
+      class="input flex-1 min-w-0"
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      autocomplete="email"
+      aria-label="Your email address"
+      class="input flex-1 min-w-0"
+    />
+  </div>
+  <label class="flex items-start gap-3 mt-4 max-w-md mx-auto text-left cursor-pointer">
+    <input type="checkbox" name="consent" required
+           class="checkbox checkbox-sm mt-0.5 bg-primary-content/10 border-primary-content/40" />
+    <span class="text-sm text-primary-content/75 leading-snug">
+      I have read and agree to the
+      <a href="/privacy/" class="underline text-primary-content hover:text-primary-content/80">Privacy Policy</a>
+      and consent to GibFlow sending me updates by email.
+    </span>
+  </label>
+  <div class="mt-5">
+    <button type="submit" id="ea-btn" class="btn btn-neutral btn-lg">
+      Keep Me Updated
+    </button>
+  </div>
 </form>
+
 </div>
 </section>
+
+<script>
+(function () {
+  var endpoint = {{ site.Params.contactFormEndpoint | default "" | jsonify }};
+  var form     = document.getElementById('ea-form');
+  var btn      = document.getElementById('ea-btn');
+  var errBox   = document.getElementById('ea-error');
+  var errMsg   = document.getElementById('ea-error-msg');
+  var success  = document.getElementById('ea-success');
+
+  if (!form) return;
+
+  function showError(msg) {
+    errMsg.textContent = msg;
+    errBox.classList.remove('hidden');
+    errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function hideError() {
+    errBox.classList.add('hidden');
+    errMsg.textContent = '';
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideError();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (!endpoint) {
+      showError('Sign-up is not yet available. Please check back shortly.');
+      return;
+    }
+
+    var data = {
+      name:    form.name.value.trim(),
+      email:   form.email.value.trim(),
+      consent: form.consent.checked,
+      bot:     form.bot ? form.bot.value : '',
+    };
+
+    btn.disabled = true;
+    btn.classList.add('loading');
+
+    try {
+      var res  = await fetch(endpoint.replace(/\/+$/, '') + '/subscribe', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+      var json = await res.json().catch(function () { return {}; });
+
+      if (res.ok && json.ok) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else {
+        showError(json.error || 'Something went wrong. Please try again shortly.');
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
+    } catch (err) {
+      showError('Could not reach the server. Please check your connection and try again.');
+      btn.disabled = false;
+      btn.classList.remove('loading');
+    }
+  });
+})();
+</script>
 
 <!-- ═══════════════════════════════════════════════════════════════
 FOR BUSINESSES
