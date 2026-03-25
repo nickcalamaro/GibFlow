@@ -18,6 +18,10 @@
 # Regenerated on every build; we use explicit @source directives instead.
 hugo_stats.json
 
+# ── Edge script bundle ───────────────────────────────────────────────────────
+# Built by `npm run build` (esbuild) in CI before Bunny deploy. Never commit.
+/dist/
+
 # ── npm / Node ────────────────────────────────────────────────────────────────
 # The whole point: commit package.json + package-lock.json,
 # run `npm install` to restore node_modules locally or in CI.

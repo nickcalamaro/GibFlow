@@ -22,6 +22,11 @@ enableRobotsTXT = true
   description = "GibFlow brings real-time bus info, cycling routes, parking and local services together in one app — built for Gibraltar by people who know how the city moves."
   keywords    = ['Gibraltar app', 'Gibraltar transport', 'Gibraltar mobility', 'Gibraltar bus tracker', 'Gibraltar cycling', 'Gibraltar smart city', 'Gibraltar visitor guide']
 
+  # Bunny Edge Script URL for the contact form.
+  # After first deploy via release-on-bunny.yml, paste the script's public URL here.
+  # e.g. "https://your-script-id.b-cdn.net"
+  contactFormEndpoint = "https://gibflow-mailer-9wbzd.bunny.run/"
+
   # Open Graph / Twitter card image
   images = ['/inspiration/GibFlowBanner.jpg']
 
@@ -89,7 +94,7 @@ enableRobotsTXT = true
   title = "Support"
   links = [
     {label = "Help Centre", url = "/help/"},
-    {label = "Contact Us",  url = "mailto:info@gibflow.gi"},
+    {label = "Contact Us",  url = "/contact/"},
   ]
 
 [build]
