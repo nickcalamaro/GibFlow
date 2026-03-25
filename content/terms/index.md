@@ -3,6 +3,9 @@ title: "Terms and Conditions"
 description: "GibFlow Ltd's terms and conditions governing use of the GibFlow mobile application, secure bicycle parking facilities, and related services in Gibraltar."
 date: 2026-02-23
 lastmod: 2026-02-23
+sitemap:
+  priority: 0.3
+  changefreq: yearly
 draft: false
 showToc: true
 TocOpen: false

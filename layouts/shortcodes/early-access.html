@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<form id="ea-form" class="mt-8" novalidate>
+<form id="ea-form" class="mt-8" data-endpoint="{{ $endpoint }}" novalidate>
   <input type="text" name="bot" tabindex="-1" autocomplete="off"
          aria-hidden="true" style="display:none" />
   <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -68,8 +68,8 @@
 
 <script>
 (function () {
-  var endpoint = {{ $endpoint | jsonify }};
   var form     = document.getElementById('ea-form');
+  var endpoint = form ? (form.dataset.endpoint || '') : '';
   var btn      = document.getElementById('ea-btn');
   var errBox   = document.getElementById('ea-error');
   var errMsg   = document.getElementById('ea-error-msg');

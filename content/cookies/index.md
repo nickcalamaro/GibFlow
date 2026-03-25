@@ -3,6 +3,9 @@ title: "Cookie Policy"
 description: "GibFlow's cookie policy — how we use cookies on our website, what your choices are, and how to manage your preferences. Compliant with UK GDPR and Gibraltar data protection law."
 date: 2026-03-25
 lastmod: 2026-03-25
+sitemap:
+  priority: 0.3
+  changefreq: yearly
 draft: false
 showToc: true
 TocOpen: false

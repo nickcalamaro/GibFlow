@@ -3,6 +3,9 @@ title: "Contact Us"
 description: "Get in touch with the GibFlow team. Questions about the app, secure cycle parking, business partnerships, or technical support. Let's get Gibraltar moving!"
 date: 2026-03-25
 lastmod: 2026-03-25
+sitemap:
+  priority: 0.7
+  changefreq: monthly
 draft: false
 showToc: false
 hideMeta: true

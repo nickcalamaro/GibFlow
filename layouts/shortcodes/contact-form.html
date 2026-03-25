@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <form id="{{ $formID }}" class="flex flex-col gap-3" novalidate>
+    <form id="{{ $formID }}" class="flex flex-col gap-3" data-endpoint="{{ $endpoint }}" novalidate>
 
       {{- /* Honeypot — hidden from humans, filled by bots */}}
       <input type="text" name="bot" tabindex="-1" autocomplete="off"
@@ -140,8 +140,8 @@
 
     <script>
     (function () {
-      var endpoint = {{ $endpoint | jsonify }};
       var form     = document.getElementById({{ printf "%s" $formID | jsonify }});
+      var endpoint = form ? (form.dataset.endpoint || '') : '';
       var btn      = document.getElementById({{ printf "%s-btn" $formID | jsonify }});
       var errBox   = document.getElementById({{ printf "%s-error" $formID | jsonify }});
       var errMsg   = document.getElementById({{ printf "%s-error-msg" $formID | jsonify }});

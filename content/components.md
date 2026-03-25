@@ -3,6 +3,9 @@ title: "Component Library"
 description: "GibFlow front-end component showcase and styling system reference — DaisyUI 5 + Tailwind CSS 4"
 date: 2026-03-22
 draft: false
+robotsNoIndex: true
+sitemap:
+  disable: true
 showToc: true
 TocOpen: true
 ---

@@ -3,6 +3,9 @@ title: "Help Centre"
 description: "Get help with GibFlow — Gibraltar's smart mobility app. Find answers about secure bicycle parking, bus routes, account setup, payments, and employer facilities."
 date: 2026-02-23
 lastmod: 2026-03-25
+sitemap:
+  priority: 0.6
+  changefreq: monthly
 draft: false
 showToc: true
 TocOpen: false

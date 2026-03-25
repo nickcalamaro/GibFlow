@@ -3,6 +3,9 @@ title: "Work With Us"
 description: "Get your Gibraltar business listed on GibFlow ahead of the public launch. Reach residents and visitors searching for restaurants, hotels, shops, attractions and services across Gibraltar."
 date: 2026-03-25
 lastmod: 2026-03-25
+sitemap:
+  priority: 0.8
+  changefreq: monthly
 draft: false
 showToc: false
 hideMeta: true

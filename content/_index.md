@@ -3,6 +3,10 @@ title: "GibFlow - Gibraltar's Smart Mobility App"
 description: "GibFlow brings real-time bus info, cycling routes, restaurants, hotels and experiences together in one app built for Gibraltar by Gibraltarians, for tourists and locals alike."
 keywords: ["Gibraltar app", "Gibraltar transport", "Gibraltar mobility", "Gibraltar bus tracker", "Gibraltar cycling", "Gibraltar visitor guide", "Gibraltar Business", "Gibraltar experiences", "Gibraltar tourism", "Gibraltar events", "Visit Gibraltar"]
 date: 2026-03-22
+lastmod: 2026-03-25
+sitemap:
+  priority: 1.0
+  changefreq: weekly
 hideMeta: true
 hideSummary: true
 searchHidden: true

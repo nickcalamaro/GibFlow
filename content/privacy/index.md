@@ -3,6 +3,9 @@ title: "Privacy Policy"
 description: "GibFlow Ltd's privacy policy — how we collect, use, store, and protect your personal data when you use the GibFlow app and website. Governed by Gibraltar's data protection framework."
 date: 2026-02-23
 lastmod: 2026-02-23
+sitemap:
+  priority: 0.3
+  changefreq: yearly
 draft: false
 showToc: true
 TocOpen: false
