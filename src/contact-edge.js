@@ -394,8 +394,9 @@ async function handleSubscribe(request, origin) {
     return jsonResp(500, { ok: false, error: 'Server configuration error.' }, origin);
   }
 
-  // ── Store in Bunny Database ────────────────────────────────────────────────
-  // Key: subscribers/{base64(lowercased email)} — stable, avoids duplicates.
+  // ── Store in Bunny Database (fire-and-forget, never blocks the response) ──
+  // Note: do NOT await any fetch here — subrequests back to Bunny infrastructure
+  // cause a 508 Loop Detected if the DB URL routes through the same pull zone.
   if (dbUrl && dbToken) {
     const key     = btoa(email.toLowerCase().trim());
     const payload = JSON.stringify({
@@ -407,20 +408,6 @@ async function handleSubscribe(request, origin) {
     });
     const dbKey = `${dbUrl.replace(/\/$/, '')}/subscribers/${key}.json`;
 
-    // Check for duplicate — if record already exists, return success silently
-    try {
-      const existing = await fetch(dbKey, {
-        headers: { AccessKey: dbToken },
-      });
-      if (existing.ok) {
-        // Already subscribed — return ok without re-sending welcome email
-        return jsonResp(200, { ok: true, duplicate: true }, origin);
-      }
-    } catch (_) {
-      // Non-fatal — proceed to write
-    }
-
-    // Write subscriber record
     fetch(dbKey, {
       method:  'PUT',
       headers: { AccessKey: dbToken, 'Content-Type': 'application/json' },
