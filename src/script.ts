@@ -248,14 +248,11 @@ async function handlePartner(request: Request, origin: string): Promise<Response
 
   if (bot) return jsonResp(200, { ok: true }, origin);
 
-  if (!name?.trim() || !email?.trim() || !business?.trim() || !message?.trim()) {
-    return jsonResp(400, { ok: false, error: "Name, email, business name and message are required." }, origin);
+  if (!name?.trim() || !email?.trim() || !business?.trim()) {
+    return jsonResp(400, { ok: false, error: "Name, email and business name are required." }, origin);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return jsonResp(400, { ok: false, error: "Please enter a valid email address." }, origin);
-  }
-  if (message.trim().length < 10) {
-    return jsonResp(400, { ok: false, error: "Message is too short." }, origin);
   }
 
   const smtp2goKey = process.env["smtp2go-apikey"];
@@ -280,27 +277,26 @@ async function handlePartner(request: Request, origin: string): Promise<Response
       <tr><td style="padding:8px 12px 8px 0;color:#666;font-weight:600;vertical-align:top">Business</td><td style="padding:8px 0;font-weight:600">${escHtml(business)}</td></tr>
       <tr><td style="padding:8px 12px 8px 0;color:#666;font-weight:600;vertical-align:top">Sent</td><td style="padding:8px 0;color:#999;font-size:12px">${ts}</td></tr>
     </table>
-    <hr style="border:none;border-top:1px solid #e0e0e0;margin:20px 0">
+    ${message?.trim() ? `<hr style="border:none;border-top:1px solid #e0e0e0;margin:20px 0">
     <h3 style="color:#333;font-size:15px;margin:0 0 10px;font-weight:600">Message</h3>
-    <div style="background:#fff;padding:16px;border-radius:6px;border:1px solid #e5e5e5;font-size:14px;line-height:1.7;white-space:pre-wrap;color:#333">${escHtml(message)}</div>
+    <div style="background:#fff;padding:16px;border-radius:6px;border:1px solid #e5e5e5;font-size:14px;line-height:1.7;white-space:pre-wrap;color:#333">${escHtml(message)}</div>` : ''}
     <p style="margin:20px 0 0;font-size:12px;color:#aaa">Reply directly to this email to respond to ${escHtml(name)} at ${escHtml(business)}.</p>
   </div>
 </div>`.trim();
 
-  const textBody = [
+  const textLines = [
     "New Business Enquiry",
     "",
     `Name:     ${name}`,
     `Email:    ${email}`,
     `Business: ${business}`,
     `Sent:     ${ts}`,
-    "",
-    "Message:",
-    message,
-    "",
-    "---",
-    "Sent from gibflow.gi/work-with-us/",
-  ].join("\n");
+  ];
+  if (message?.trim()) {
+    textLines.push("", "Message:", message);
+  }
+  textLines.push("", "---", "Sent from gibflow.gi/work-with-us/");
+  const textBody = textLines.join("\n");
 
   let emailSent = false;
   try {
@@ -334,7 +330,7 @@ async function handlePartner(request: Request, origin: string): Promise<Response
       const id = `${ts.replace(/[:.]/g, "-")}-${Math.random().toString(36).slice(2, 7)}`;
       database.execute({
         sql: "INSERT INTO contact_log (id, name, email, subject, message, ts, email_sent, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        args: [id, name, email, `Business: ${business}`, message, ts, emailSent ? 1 : 0, "partner"],
+        args: [id, name, email, `Business: ${business}`, message || "", ts, emailSent ? 1 : 0, "partner"],
       }).catch((err) => console.warn("[GibFlow] DB log failed (partner, non-fatal):", err));
     }
   } catch (err) {

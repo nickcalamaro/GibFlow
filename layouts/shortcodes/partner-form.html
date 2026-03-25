@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <form id="{{ $formID }}" class="flex flex-col gap-3" data-endpoint="{{ $endpoint }}" novalidate>
+    <form id="{{ $formID }}" class="flex flex-col gap-3" data-endpoint="{{ $endpoint }}">
 
       {{- /* Honeypot */}}
       <input type="text" name="bot" tabindex="-1" autocomplete="off"
@@ -73,13 +73,12 @@
       <fieldset class="fieldset w-full">
         <legend class="fieldset-legend">
           Tell us about your business and what you have in mind
-          <span class="text-error ml-0.5" aria-hidden="true">*</span>
         </legend>
         <textarea name="message"
                   placeholder="What kind of business are you running, where are you based, and what are you looking to do with GibFlow?"
-                  rows="6" required class="textarea w-full validator"></textarea>
+                  rows="6" class="textarea w-full"></textarea>
         <p class="label text-xs text-base-content/55 mt-1">
-          We typically respond within one business day.
+          Optional, but the more detail you give us the more useful our reply will be.
         </p>
       </fieldset>
 
@@ -126,7 +125,6 @@
   function showError(msg) {
     errMsg.textContent = msg;
     errBox.classList.remove('hidden');
-    errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function hideError() {
@@ -138,6 +136,7 @@
     e.preventDefault();
     hideError();
 
+    // Let the browser validate required fields
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -148,12 +147,18 @@
       return;
     }
 
+    var nameField     = form.querySelector('[name="name"]');
+    var emailField    = form.querySelector('[name="email"]');
+    var businessField = form.querySelector('[name="business"]');
+    var messageField  = form.querySelector('[name="message"]');
+    var botField      = form.querySelector('[name="bot"]');
+
     var data = {
-      name:     form.name.value.trim(),
-      email:    form.email.value.trim(),
-      business: form.business.value.trim(),
-      message:  form.message.value.trim(),
-      bot:      form.bot ? form.bot.value : '',
+      name:     nameField.value.trim(),
+      email:    emailField.value.trim(),
+      business: businessField.value.trim(),
+      message:  messageField.value.trim(),
+      bot:      botField ? botField.value : '',
     };
 
     btn.disabled = true;
