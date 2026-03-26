@@ -58,20 +58,74 @@ function escHtml(str: string): string {
 }
 
 // ── Database (optional) ──────────────────────────────────────────────────────
+// Uses raw HTTP to the libSQL Hrana v2 pipeline API.
+// The @libsql/client npm package is incompatible with Bunny's fetch wrapper.
 
-let db: ReturnType<typeof import("https://esm.sh/@libsql/client@0.6.0/web").createClient> | null = null;
+let dbUrl: string | null = null;
+let dbToken: string | null = null;
+let tablesReady = false;
 
-async function getDb() {
-  if (db) return db;
-  const url = process.env["gib-flow-database-url"];
-  const authToken = process.env["gibflow-database-full-access-token"];
-  if (!url || !authToken) return null;
+interface DbResult {
+  columns: string[];
+  rows: unknown[][];
+}
 
-  const { createClient } = await import("https://esm.sh/@libsql/client@0.6.0/web");
-  db = createClient({ url, authToken });
+async function dbExecute(sql: string, args: unknown[] = []): Promise<DbResult | null> {
+  if (!dbUrl) {
+    const rawUrl = process.env["gib-flow-database-url"];
+    dbToken = process.env["gibflow-database-full-access-token"] || null;
+    if (!rawUrl || !dbToken) return null;
+    // Ensure https and strip trailing slash
+    dbUrl = rawUrl.replace(/^libsql:\/\//, "https://").replace(/\/+$/, "");
+  }
 
-  // Ensure tables exist (idempotent)
-  await db.execute(`
+  const resp = await fetch(`${dbUrl}/v2/pipeline`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${dbToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      requests: [
+        {
+          type: "execute",
+          stmt: {
+            sql,
+            args: args.map((a) => {
+              if (a === null || a === undefined) return { type: "null", value: null };
+              if (typeof a === "number") return { type: "integer", value: String(a) };
+              return { type: "text", value: String(a) };
+            }),
+          },
+        },
+        { type: "close" },
+      ],
+    }),
+  });
+
+  if (!resp.ok) {
+    const text = await resp.text();
+    console.error("[GibFlow] DB HTTP error:", resp.status, text);
+    return null;
+  }
+
+  const json = await resp.json();
+  const result = json?.results?.[0]?.response?.result;
+  if (!result) return null;
+
+  return {
+    columns: (result.cols || []).map((c: { name: string }) => c.name),
+    rows: (result.rows || []).map((r: { value: unknown }[]) => r.map((cell) => cell.value)),
+  };
+}
+
+async function ensureTables(): Promise<boolean> {
+  if (tablesReady) return true;
+  const rawUrl = process.env["gib-flow-database-url"];
+  const token = process.env["gibflow-database-full-access-token"];
+  if (!rawUrl || !token) return false;
+
+  await dbExecute(`
     CREATE TABLE IF NOT EXISTS subscribers (
       email      TEXT PRIMARY KEY,
       name       TEXT NOT NULL,
@@ -81,7 +135,7 @@ async function getDb() {
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     )
   `);
-  await db.execute(`
+  await dbExecute(`
     CREATE TABLE IF NOT EXISTS contact_log (
       id         TEXT PRIMARY KEY,
       name       TEXT NOT NULL,
@@ -94,7 +148,8 @@ async function getDb() {
     )
   `);
 
-  return db;
+  tablesReady = true;
+  return true;
 }
 
 // ── Entry point ──────────────────────────────────────────────────────────────
@@ -215,13 +270,13 @@ async function handleContact(request: Request, origin: string): Promise<Response
 
   // Log to database (best-effort, never blocks the response)
   try {
-    const database = await getDb();
-    if (database) {
+    const ready = await ensureTables();
+    if (ready) {
       const id = `${ts.replace(/[:.]/g, "-")}-${Math.random().toString(36).slice(2, 7)}`;
-      database.execute({
-        sql: "INSERT INTO contact_log (id, name, email, subject, message, ts, email_sent, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        args: [id, name, email, subject || "General Enquiry", message, ts, emailSent ? 1 : 0, "contact"],
-      }).catch((err) => console.warn("[GibFlow] DB log failed (non-fatal):", err));
+      dbExecute(
+        "INSERT INTO contact_log (id, name, email, subject, message, ts, email_sent, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [id, name, email, subject || "General Enquiry", message, ts, emailSent ? 1 : 0, "contact"],
+      ).catch((err: unknown) => console.warn("[GibFlow] DB log failed (non-fatal):", err));
     }
   } catch (err) {
     console.warn("[GibFlow] DB init failed (non-fatal):", err);
@@ -325,13 +380,13 @@ async function handlePartner(request: Request, origin: string): Promise<Response
 
   // Log to database (best-effort)
   try {
-    const database = await getDb();
-    if (database) {
+    const ready = await ensureTables();
+    if (ready) {
       const id = `${ts.replace(/[:.]/g, "-")}-${Math.random().toString(36).slice(2, 7)}`;
-      database.execute({
-        sql: "INSERT INTO contact_log (id, name, email, subject, message, ts, email_sent, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        args: [id, name, email, `Business: ${business}`, message || "", ts, emailSent ? 1 : 0, "partner"],
-      }).catch((err) => console.warn("[GibFlow] DB log failed (partner, non-fatal):", err));
+      dbExecute(
+        "INSERT INTO contact_log (id, name, email, subject, message, ts, email_sent, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [id, name, email, `Business: ${business}`, message || "", ts, emailSent ? 1 : 0, "partner"],
+      ).catch((err: unknown) => console.warn("[GibFlow] DB log failed (partner, non-fatal):", err));
     }
   } catch (err) {
     console.warn("[GibFlow] DB init failed (non-fatal):", err);
@@ -381,12 +436,12 @@ async function handleSubscribe(request: Request, origin: string): Promise<Respon
 
   // Store in database (fire-and-forget)
   try {
-    const database = await getDb();
-    if (database) {
-      database.execute({
-        sql: "INSERT OR IGNORE INTO subscribers (email, name, consent, consent_ts, source) VALUES (?, ?, 1, ?, ?)",
-        args: [email.toLowerCase().trim(), name.trim(), ts, "website-early-access"],
-      }).catch((err) => console.warn("[GibFlow] Subscriber DB write failed (non-fatal):", err));
+    const ready = await ensureTables();
+    if (ready) {
+      dbExecute(
+        "INSERT OR IGNORE INTO subscribers (email, name, consent, consent_ts, source) VALUES (?, ?, 1, ?, ?)",
+        [email.toLowerCase().trim(), name.trim(), ts, "website-early-access"],
+      ).catch((err: unknown) => console.warn("[GibFlow] Subscriber DB write failed (non-fatal):", err));
     }
   } catch (err) {
     console.warn("[GibFlow] DB init failed (non-fatal):", err);

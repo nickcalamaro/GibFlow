@@ -194,23 +194,18 @@ Current environment configuration:
 - `gibflow-database-full-access-token` (secret) — libSQL auth token
 
 ### Database
-Bunny provides a libSQL-compatible database. When a database is linked to a
-script, `BUNNY_DATABASE_URL` and `BUNNY_DATABASE_AUTH_TOKEN` are auto-injected.
-Use the `@libsql/client` from esm.sh:
+Bunny provides a libSQL-compatible database. Use raw HTTP requests to the
+libSQL Hrana v2 pipeline API. Do NOT use `@libsql/client` from esm.sh — its
+internal fetch calls are incompatible with Bunny's fetch wrapper.
 
 ```ts
-import { createClient } from "https://esm.sh/@libsql/client@0.6.0/web";
-import process from "node:process";
-
-const db = createClient({
-  url: process.env.BUNNY_DATABASE_URL,
-  authToken: process.env.BUNNY_DATABASE_AUTH_TOKEN,
-});
+// POST to {url}/v2/pipeline with Bearer token auth
+// See dbExecute() in src/script.ts for the full implementation
 ```
 
 Do NOT use raw `fetch()` calls to Bunny Storage URLs from within an edge script.
 Subrequests that route back through the same pull zone cause a **508 Loop Detected**
-error. Always use the libSQL client for database operations.
+error.
 
 ### Deployment
 The workflow deploys the `.ts` file directly. Bunny's Deno runtime handles
