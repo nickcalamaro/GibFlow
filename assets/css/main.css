@@ -345,6 +345,17 @@ body.list {
   padding: 0;
 }
 
+/* PaperMod renders the page title outside .gf-download; without main padding it sat flush left.
+   Match the same max-width and horizontal inset as .gf-container. */
+.main:has(.gf-download) .post-header,
+.main:has(.gf-download) .page-header {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .gf-download-hero {
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--radius-box) + 0.25rem);
@@ -379,11 +390,16 @@ body.list {
   position: relative;
 }
 
-.store-link-card img {
+/* Official Play badge PNG has more padding than Apple's SVG; scale Play up so both read at similar visual weight */
+.store-link-card img.store-badge-img {
   display: block;
   width: auto;
   height: 3rem;
   max-width: 100%;
+}
+
+.store-link-card img.store-badge-img--google-play {
+  height: 3.95rem;
 }
 
 .store-link-card .coming-soon-chip {
