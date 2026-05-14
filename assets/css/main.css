@@ -338,3 +338,87 @@ body.list {
   height: 50px;
   width: auto;
 }
+
+/* Download page: allow full-bleed sections like homepage */
+.main:has(.gf-download) {
+  max-width: 100%;
+  padding: 0;
+}
+
+.gf-download-hero {
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--radius-box) + 0.25rem);
+  background:
+    radial-gradient(circle at top right, color-mix(in oklab, var(--color-primary) 16%, transparent), transparent 52%),
+    radial-gradient(circle at top left, color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 50%),
+    var(--color-base-100);
+  box-shadow: 0 20px 50px color-mix(in oklab, var(--color-neutral) 10%, transparent);
+  padding: 2rem;
+}
+
+.store-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  text-decoration: none;
+  border: 1px solid var(--color-base-300);
+  background-color: var(--color-base-100);
+  border-radius: var(--radius-box);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.store-link-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--color-primary) 45%, var(--color-base-300));
+  box-shadow: 0 14px 30px color-mix(in oklab, var(--color-neutral) 12%, transparent);
+}
+
+.store-link-card.is-coming-soon {
+  position: relative;
+}
+
+.store-link-card img {
+  display: block;
+  width: auto;
+  height: 3rem;
+  max-width: 100%;
+}
+
+.store-link-card .coming-soon-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--color-primary) 40%, var(--color-base-300));
+  background-color: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100));
+  color: var(--color-base-content);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+}
+
+.gf-feature-card {
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--radius-box) + 0.2rem);
+  background-color: var(--color-base-100);
+  overflow: hidden;
+  box-shadow: 0 10px 28px color-mix(in oklab, var(--color-neutral) 8%, transparent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gf-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px color-mix(in oklab, var(--color-neutral) 14%, transparent);
+}
+
+.gf-feature-image {
+  width: 100%;
+  height: 13rem;
+  object-fit: cover;
+  display: block;
+}
+
+.gf-feature-body {
+  padding: 1.1rem;
+}

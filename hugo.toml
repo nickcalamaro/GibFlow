@@ -74,6 +74,13 @@ enableRobotsTXT = true
     url        = '/#early-access'
     weight     = 40
 
+      [[menu.main]]
+    identifier = 'download'
+    name       = 'Download'
+    url        = '/download'
+    weight     = 45
+
+
 # ── Footer columns ────────────────────────────────────────────────────────────
 # Drives the link columns in layouts/partials/footer.html.
 # Three columns: navigation, legal, and support.
