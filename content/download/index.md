@@ -96,11 +96,24 @@ Whether you're walking, cycling, driving or taking public transport, our app is 
 
 <p class="text-xs text-base-content/60 mt-6 mb-0">
 Source: Unsplash photos by
-<a class="link link-primary" href="https://unsplash.com/@mike" target="_blank" rel="noopener noreferrer">Mike Kotsch</a>,
 <a class="link link-primary" href="https://unsplash.com/@addekalk" target="_blank" rel="noopener noreferrer">Aron Fjell</a>,
 and
 <a class="link link-primary" href="https://unsplash.com/@michalmrozek" target="_blank" rel="noopener noreferrer">Michal Mrozek</a>.
 </p>
+</div>
+</section>
+
+<section class="py-24 px-6 bg-primary" id="early-access">
+<div class="max-w-xl mx-auto text-center reveal">
+<span class="badge badge-neutral mb-6">Stay Updated</span>
+<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Be first to know when GibFlow is available</h2>
+<p class="mt-4 text-lg text-primary-content/80 leading-relaxed">
+The App Store and Google Play listings are on the way. Leave your details and we will email you as soon as GibFlow is ready to download, plus news on launch features and mobility updates in Gibraltar.
+</p>
+<p class="mt-2 text-sm text-primary-content/60">No spam. Unsubscribe any time by replying to any email.</p>
+
+{{< early-access >}}
+
 </div>
 </section>
 </div>

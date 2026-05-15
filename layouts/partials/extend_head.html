@@ -2,23 +2,26 @@
   extend_head.html — GibFlow component stylesheet
   Injected at the end of <head> by PaperMod's head.html partial.
 
-  Loads assets/css/main.css through Hugo's PostCSS pipe (Tailwind CSS 4 +
-  DaisyUI 5). In production the file is minified and fingerprinted for
-  cache-busting. During development it is served unprocessed for fast reloads.
+  CSS is built with PostCSS CLI (Tailwind 4 + DaisyUI 5), not Hugo's css.PostCSS
+  pipe. Hugo's PostCSS runner disables native Node addons, which Tailwind 4 needs
+  (lightningcss).
 
-  Pre-requisite: run `npm install` in the project root before `hugo server`.
+  Before hugo server or hugo --minify, run:
+    npm run css:build
+  While editing CSS locally, run in a second terminal:
+    npm run css:watch
 */ -}}
 
-{{- $css := resources.Get "css/main.css" -}}
-{{- if $css -}}
-  {{- if hugo.IsProduction -}}
-    {{- $css = $css | css.PostCSS | minify | fingerprint -}}
-    <link crossorigin="anonymous"
-          rel="preload stylesheet" as="style"
-          href="{{ $css.RelPermalink }}"
-          integrity="{{ $css.Data.Integrity }}">
-  {{- else -}}
-    {{- $css = $css | css.PostCSS -}}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-  {{- end -}}
+{{- $css := resources.Get "css/dist/main.css" -}}
+{{- if not $css -}}
+  {{- errorf "Built CSS not found at assets/css/dist/main.css. Run: npm run css:build" -}}
+{{- end -}}
+{{- if hugo.IsProduction -}}
+  {{- $css = $css | minify | fingerprint -}}
+  <link crossorigin="anonymous"
+        rel="preload stylesheet" as="style"
+        href="{{ $css.RelPermalink }}"
+        integrity="{{ $css.Data.Integrity }}">
+{{- else -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- end -}}
