@@ -310,36 +310,54 @@
   height: 66px;
 }
 
-/* See it in use: one poster at a time, swipe or use the controls.
-   Height is capped so the whole poster and the arrows sit in view together. */
+/* See it in use: the current poster is centred, with the previous and next
+   posters visible in the space on either side. Touch and trackpad swipe
+   move one poster at a time. */
 .gf-carousel {
-  --poster-h: min(68vh, 620px);
-  width: min(100%, calc(var(--poster-h) * 473 / 1024));
+  container-type: inline-size;
+  --gap: 0.85rem;
+  /* Wide screens fit the current poster plus the previous and next ones.
+     Narrow screens keep the current poster readable and let the neighbours peek in. */
+  --slide-w: clamp(12rem, 64cqi, calc((100cqi - 2 * var(--gap)) / 3));
+  width: 100%;
   margin-inline: auto;
 }
 .gf-carousel-viewport {
   display: flex;
-  height: var(--poster-h);
+  gap: var(--gap);
+  position: relative;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   scrollbar-width: none;
-  border-radius: 1.25rem;
-  box-shadow: 0 16px 40px color-mix(in oklab, var(--color-neutral) 16%, transparent);
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+  padding-block: 0.75rem;
+  padding-inline: calc((100% - var(--slide-w)) / 2);
+  cursor: grab;
 }
 .gf-carousel-viewport::-webkit-scrollbar {
   display: none;
 }
+.gf-carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
 .gf-carousel-viewport img {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  flex: 0 0 var(--slide-w);
+  width: var(--slide-w);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 473 / 1024;
+  object-fit: cover;
   scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: block;
   margin: 0;
-  border-radius: 0;
+  border-radius: 1.25rem;
   background: #fff;
+  box-shadow: 0 16px 40px color-mix(in oklab, var(--color-neutral) 16%, transparent);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .gf-carousel-controls {
   display: flex;

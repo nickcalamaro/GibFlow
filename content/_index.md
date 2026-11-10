@@ -165,24 +165,25 @@ SEE IT IN USE
 src="/app/see-it-exploring.jpg"
 alt="Gib Flow poster: Less searching. More exploring. Two phones showing turn-by-turn directions across Gibraltar."
 width="473" height="1024"
+loading="eager"
 />
 <img
 src="/app/see-it-services.jpg"
 alt="Gib Flow poster: Buses, parking, local businesses and essential services, with the map open on Main Street."
 width="473" height="1024"
-loading="lazy"
+loading="eager"
 />
 <img
 src="/app/see-it-commute.jpg"
 alt="Gib Flow poster: From your morning commute to your next local discovery, showing Queensway Car Park and a parking session."
 width="473" height="1024"
-loading="lazy"
+loading="eager"
 />
 <img
 src="/app/see-it-filters.jpg"
 alt="Gib Flow poster: Gibraltar deserves an app that understands how it moves, with filters for parking, buses and public services."
 width="473" height="1024"
-loading="lazy"
+loading="eager"
 />
 </div>
 <div class="gf-carousel-controls">

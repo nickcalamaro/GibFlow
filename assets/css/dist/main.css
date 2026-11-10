@@ -2892,6 +2892,9 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .resize {
+    resize: both;
+  }
   .stats-vertical {
     @layer daisyui.l1.l2 {
       grid-auto-flow: row;
@@ -3843,36 +3846,51 @@
   height: 66px;
 }
 .gf-carousel {
-  --poster-h: min(68vh, 620px);
-  width: min(100%, calc(var(--poster-h) * 473 / 1024));
+  container-type: inline-size;
+  --gap: 0.85rem;
+  --slide-w: clamp(12rem, 64cqi, calc((100cqi - 2 * var(--gap)) / 3));
+  width: 100%;
   margin-inline: auto;
 }
 .gf-carousel-viewport {
   display: flex;
-  height: var(--poster-h);
+  gap: var(--gap);
+  position: relative;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   scrollbar-width: none;
-  border-radius: 1.25rem;
-  box-shadow: 0 16px 40px var(--color-neutral);
-  @supports (color: color-mix(in lab, red, red)) {
-    box-shadow: 0 16px 40px color-mix(in oklab, var(--color-neutral) 16%, transparent);
-  }
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+  padding-block: 0.75rem;
+  padding-inline: calc((100% - var(--slide-w)) / 2);
+  cursor: grab;
 }
 .gf-carousel-viewport::-webkit-scrollbar {
   display: none;
 }
+.gf-carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
 .gf-carousel-viewport img {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  flex: 0 0 var(--slide-w);
+  width: var(--slide-w);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 473 / 1024;
+  object-fit: cover;
   scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: block;
   margin: 0;
-  border-radius: 0;
+  border-radius: 1.25rem;
   background: #fff;
+  box-shadow: 0 16px 40px var(--color-neutral);
+  @supports (color: color-mix(in lab, red, red)) {
+    box-shadow: 0 16px 40px color-mix(in oklab, var(--color-neutral) 16%, transparent);
+  }
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .gf-carousel-controls {
   display: flex;

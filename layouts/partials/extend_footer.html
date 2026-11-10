@@ -33,44 +33,133 @@
   if (!root) return;
 
   var viewport = root.querySelector('.gf-carousel-viewport');
-  var slides = viewport ? viewport.querySelectorAll('img') : [];
   var dots = root.querySelectorAll('.gf-carousel-dot');
   var prev = root.querySelector('[data-carousel-prev]');
   var next = root.querySelector('[data-carousel-next]');
-  if (!viewport || !slides.length) return;
+  if (!viewport) return;
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var originals = Array.prototype.slice.call(viewport.querySelectorAll('img'));
+  if (originals.length < 2) return;
 
-  function index() {
-    var width = viewport.clientWidth;
-    if (!width) return 0;
-    return Math.max(0, Math.min(slides.length - 1, Math.round(viewport.scrollLeft / width)));
+  originals.forEach(function (img) {
+    img.draggable = false;
+    img.setAttribute('draggable', 'false');
+  });
+
+  function cloneEdge(img) {
+    var copy = img.cloneNode(true);
+    copy.alt = '';
+    copy.setAttribute('aria-hidden', 'true');
+    copy.removeAttribute('loading');
+    copy.draggable = false;
+    return copy;
   }
 
-  function go(i) {
-    var nextIndex = (i + slides.length) % slides.length;
+  viewport.insertBefore(cloneEdge(originals[originals.length - 1]), originals[0]);
+  viewport.insertBefore(cloneEdge(originals[originals.length - 2]), viewport.querySelector('img'));
+  viewport.appendChild(cloneEdge(originals[0]));
+  viewport.appendChild(cloneEdge(originals[1]));
+
+  var count = originals.length;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var jumping = false;
+
+  function items() {
+    return viewport.querySelectorAll('img');
+  }
+
+  function idealCenter(itemIndex) {
+    var slides = items();
+    var item = slides[itemIndex];
+    if (!item) return 0;
+    return item.offsetLeft - (viewport.clientWidth - item.offsetWidth) / 2;
+  }
+
+  function centerOf(itemIndex) {
+    return Math.max(0, idealCenter(itemIndex));
+  }
+
+  function nearest() {
+    var slides = items();
+    var best = 2;
+    var bestDelta = Infinity;
+    for (var i = 0; i < slides.length; i++) {
+      var delta = Math.abs(viewport.scrollLeft - idealCenter(i));
+      if (delta < bestDelta) {
+        bestDelta = delta;
+        best = i;
+      }
+    }
+    return best;
+  }
+
+  function realIndex() {
+    return (nearest() - 2 + count) % count;
+  }
+
+  function scrollToReal(index, behavior) {
+    var wrapped = (index % count + count) % count;
     viewport.scrollTo({
-      left: nextIndex * viewport.clientWidth,
-      behavior: reduce ? 'auto' : 'smooth'
+      left: centerOf(wrapped + 2),
+      behavior: behavior || 'auto'
     });
   }
 
   function sync() {
-    var current = index();
+    var current = realIndex();
     dots.forEach(function (dot, n) {
       if (n === current) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
   }
 
-  if (prev) prev.addEventListener('click', function () { go(index() - 1); });
-  if (next) next.addEventListener('click', function () { go(index() + 1); });
+  function settle() {
+    if (jumping) return;
+    var pos = nearest();
+    if (pos < 2 || pos >= count + 2) {
+      jumping = true;
+      var real = (pos - 2 + count) % count;
+      viewport.scrollTo({ left: centerOf(real + 2), behavior: 'auto' });
+      window.requestAnimationFrame(function () { jumping = false; sync(); });
+      return;
+    }
+    sync();
+  }
+
+  if (prev) prev.addEventListener('click', function () { scrollToReal(realIndex() - 1, reduce ? 'auto' : 'smooth'); });
+  if (next) next.addEventListener('click', function () { scrollToReal(realIndex() + 1, reduce ? 'auto' : 'smooth'); });
   dots.forEach(function (dot, n) {
-    dot.addEventListener('click', function () { go(n); });
+    dot.addEventListener('click', function () { scrollToReal(n, reduce ? 'auto' : 'smooth'); });
   });
+
+  var scrollTimer;
   viewport.addEventListener('scroll', function () {
+    if (jumping) return;
     window.requestAnimationFrame(sync);
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(settle, 90);
   }, { passive: true });
+  if ('onscrollend' in viewport) viewport.addEventListener('scrollend', settle);
+
+  function recenter() {
+    scrollToReal(realIndex(), 'auto');
+  }
+
+  window.addEventListener('resize', recenter);
+  window.addEventListener('load', recenter);
+  items().forEach(function (img) {
+    if (!img.complete) img.addEventListener('load', recenter);
+  });
+  if (window.ResizeObserver) {
+    var resizeTimer;
+    var ro = new ResizeObserver(function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(recenter, 60);
+    });
+    ro.observe(viewport);
+  }
+
+  scrollToReal(0, 'auto');
   sync();
 })();
 </script>

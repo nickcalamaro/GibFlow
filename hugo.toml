@@ -3,9 +3,9 @@ languageCode = 'en-gb'
 title        = "Gib Flow — Gibraltar's Smart Mobility App"
 theme        = 'PaperMod'
 
-# Rewrite root-relative URLs (/foo) to absolute URLs using baseURL.
-# Required when the site is served from a subdirectory on GitHub Pages.
-canonifyURLs = true
+# Keep links root-relative (/foo). The site is served from the domain root.
+# canonifyURLs made `hugo server` point assets at the live-reload port, and the
+# browser then blocked the stylesheets (CORS), which left the page unstyled.
 
 # ── SEO ────────────────────────────────────────────────────────────────────────
 enableRobotsTXT = true
