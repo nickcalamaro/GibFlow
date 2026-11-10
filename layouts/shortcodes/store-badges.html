@@ -1,0 +1,5 @@
+{{- /*
+  store-badges — App Store and Google Play links.
+  align: "center" (default) | "start"
+*/ -}}
+{{- partial "store-badges.html" (dict "align" (.Get "align" | default "center")) -}}

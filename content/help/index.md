@@ -1,8 +1,8 @@
 ---
 title: "Help Centre"
-description: "Get help with GibFlow — Gibraltar's smart mobility app. Find answers about secure bicycle parking, bus routes, account setup, payments, and employer facilities."
+description: "Get help with Gib Flow — Gibraltar's smart mobility app. Find answers about secure bicycle parking, bus routes, account setup, payments, and employer facilities."
 date: 2026-02-23
-lastmod: 2026-03-25
+lastmod: 2026-11-10
 sitemap:
   priority: 0.6
   changefreq: monthly
@@ -10,7 +10,7 @@ draft: false
 showToc: true
 TocOpen: false
 hideMeta: true
-keywords: ["GibFlow help", "GibFlow FAQ", "Gibraltar mobility app support", "secure bicycle parking Gibraltar", "GibFlow account help", "Gibraltar bus app support", "GibFlow employer facilities"]
+keywords: ["Gib Flow help", "Gib Flow FAQ", "Gibraltar mobility app support", "secure bicycle parking Gibraltar", "Gib Flow account help", "Gibraltar bus app support", "Gib Flow employer facilities"]
 ---
 
 <div class="not-prose mb-6">
@@ -25,13 +25,13 @@ keywords: ["GibFlow help", "GibFlow FAQ", "Gibraltar mobility app support", "sec
   </div>
 </div>
 
-Welcome to the GibFlow Help Centre. Here you'll find guidance on navigation features, secure bicycle parking, employer facilities, payments, and upcoming real-time bus tracking across Gibraltar.
+Welcome to the Gib Flow Help Centre. Gib Flow is in early access on the App Store and Google Play. The official launch is December 2026. Here you'll find guidance on navigation features, secure bicycle parking, employer facilities, payments, and bus information across Gibraltar.
 
 ## General
 
-### What is GibFlow?
+### What is Gib Flow?
 
-GibFlow is a mobility app designed to help residents and visitors navigate Gibraltar more efficiently.
+Gib Flow is a mobility app designed to help residents and visitors navigate Gibraltar more efficiently.
 
 It provides:
 
@@ -44,7 +44,9 @@ It provides:
 
 ### How do I create an account?
 
-1. Download the app from your app store.
+{{< store-badges align="start" >}}
+
+1. Download the app from the App Store or Google Play.
 2. Open the app and select **Create Account**.
 3. Pay the one-off fee of £1.69.
 4. Enter your details and verify your email.
@@ -124,17 +126,17 @@ Report it immediately through the app (if reporting is enabled) or contact our s
 
 ## Employer & Private Facilities
 
-### My employer offers secure bike parking through GibFlow — how do I access it?
+### My employer offers secure bike parking through Gib Flow — how do I access it?
 
 Your employer will provide registration instructions. Once registered:
 
-1. Log into your GibFlow account.
+1. Log into your Gib Flow account.
 2. Navigate to **My Facilities**.
 3. Book and unlock as permitted under your company's arrangement.
 
 ### Who manages the facility?
 
-The physical facility is operated by your employer or the designated site operator. GibFlow provides the digital booking and access platform.
+The physical facility is operated by your employer or the designated site operator. Gib Flow provides the digital booking and access platform.
 
 ### Can employers customise access?
 
@@ -162,7 +164,7 @@ Refund policies depend on the facility and booking type. Full details will be sh
 
 ### Does the app show bus routes?
 
-Yes. GibFlow provides bus stop locations and route information across Gibraltar.
+Yes. Gib Flow provides bus stop locations and route information across Gibraltar.
 
 ### Will the app show real-time bus tracking?
 
@@ -200,7 +202,7 @@ Try the following steps:
 
 If the issue continues, contact support.
 
-### Does GibFlow track my location?
+### Does Gib Flow track my location?
 
 Location data may be used to provide navigation features and facility access — but only where you grant permission in your device settings. You can revoke permission at any time. For full details, see our [Privacy Policy](/privacy/).
 
@@ -210,7 +212,7 @@ Location data may be used to provide navigation features and facility access —
 
 <div class="card bg-base-200 not-prose mt-2">
   <div class="card-body">
-    <h3 class="font-semibold text-base-content mb-3">GibFlow Support Team</h3>
+    <h3 class="font-semibold text-base-content mb-3">Gib Flow Support Team</h3>
     <div class="space-y-2 text-sm text-base-content/80">
       <div class="flex items-center gap-2">
         <span>✉️</span>

@@ -1,7 +1,7 @@
 {
   "name": "gibflow",
   "version": "1.0.0",
-  "description": "GibFlow – Modern, eco-conscious digital presence from Gibraltar",
+  "description": "Gib Flow – Modern, eco-conscious digital presence from Gibraltar",
   "private": true,
   "scripts": {
     "dev": "hugo server --disableFastRender",

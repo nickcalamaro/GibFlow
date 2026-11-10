@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-description: "GibFlow Ltd's privacy policy — how we collect, use, store, and protect your personal data when you use the GibFlow app and website. Governed by Gibraltar's data protection framework."
+description: "Gib Flow Ltd's privacy policy — how we collect, use, store, and protect your personal data when you use the Gib Flow app and website. Governed by Gibraltar's data protection framework."
 date: 2026-02-23
 lastmod: 2026-02-23
 sitemap:
@@ -10,7 +10,7 @@ draft: false
 showToc: true
 TocOpen: false
 hideMeta: true
-keywords: ["GibFlow privacy policy", "GibFlow data protection", "Gibraltar GDPR", "personal data GibFlow", "data controller Gibraltar", "GibFlow data rights"]
+keywords: ["Gib Flow privacy policy", "Gib Flow data protection", "Gibraltar GDPR", "personal data Gib Flow", "data controller Gibraltar", "Gib Flow data rights"]
 ---
 
 <div class="not-prose mb-8 flex flex-wrap gap-3 items-start">
@@ -18,11 +18,11 @@ keywords: ["GibFlow privacy policy", "GibFlow data protection", "Gibraltar GDPR"
   <div class="badge badge-ghost">Last updated: 23 February 2026</div>
 </div>
 
-Gib Flow Ltd ("GibFlow", "we", "us", "our") is committed to protecting your personal data and respecting your privacy.
+Gib Flow Ltd ("Gib Flow", "we", "us", "our") is committed to protecting your personal data and respecting your privacy.
 
-This Privacy Policy explains how we collect, use, store, and protect your information when you use the GibFlow mobile application ("App"), website, and related services.
+This Privacy Policy explains how we collect, use, store, and protect your information when you use the Gib Flow mobile application ("App"), website, and related services.
 
-By using GibFlow, you acknowledge that your personal data will be processed as described in this Policy.
+By using Gib Flow, you acknowledge that your personal data will be processed as described in this Policy.
 
 ## Who We Are
 
@@ -68,7 +68,7 @@ We may collect and process the following categories of data:
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current h-6 w-6 shrink-0">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
   </svg>
-  <span>Payment card details are processed securely by third-party payment providers and are <strong>not stored by GibFlow</strong>.</span>
+  <span>Payment card details are processed securely by third-party payment providers and are <strong>not stored by Gib Flow</strong>.</span>
 </div>
 
 ### Location Data
@@ -190,7 +190,7 @@ If you visit our website, we may use cookies and analytics tools to understand u
 
 ## Changes to This Policy
 
-We may update this Privacy Policy from time to time. Changes will be published on our website and within the App, with an updated "Last Updated" date. Continued use of GibFlow after updates constitutes acceptance of the revised policy.
+We may update this Privacy Policy from time to time. Changes will be published on our website and within the App, with an updated "Last Updated" date. Continued use of Gib Flow after updates constitutes acceptance of the revised policy.
 
 ## Contact & Complaints
 

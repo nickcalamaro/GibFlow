@@ -1,5 +1,5 @@
 {{- /*
-  layouts/partials/footer.html — GibFlow override of PaperMod's footer.
+  layouts/partials/footer.html — Gib Flow override of PaperMod's footer.
   Replaces the single-line centered footer with a proper multi-column
   DaisyUI-styled footer while retaining all PaperMod JS (menu scroll,
   scroll-to-top button, theme toggle, code copy).
@@ -48,6 +48,9 @@
         <p class="mt-2 text-sm text-base-content/60 max-w-xs leading-relaxed">
           {{ $tagline }}
         </p>
+        <div class="mt-4">
+          {{- partial "store-badges.html" (dict "align" "start") -}}
+        </div>
         {{- /* Social icons pulled from site params */}}
         {{- with site.Params.socialIcons }}
         <div class="mt-4 flex gap-2">

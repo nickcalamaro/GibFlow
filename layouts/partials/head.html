@@ -1,5 +1,5 @@
 {{- /*
-  layouts/partials/head.html — GibFlow override of PaperMod's head.html
+  layouts/partials/head.html — Gib Flow override of PaperMod's head.html
   ─────────────────────────────────────────────────────────────────────
   ONLY CHANGE: PaperMod's stylesheet is loaded via @import ... layer(papermod)
   instead of a plain <link>. This puts ALL of PaperMod's CSS into a named
@@ -89,7 +89,7 @@
 {{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
 
 {{- /*
-  ── GibFlow change ──────────────────────────────────────────────────
+  ── Gib Flow change ──────────────────────────────────────────────────
   Load PaperMod's stylesheet inside @layer papermod.
 
   The @layer declaration MUST come first — it pre-declares the full

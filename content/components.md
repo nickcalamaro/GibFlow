@@ -1,6 +1,6 @@
 ---
 title: "Component Library"
-description: "GibFlow front-end component showcase and styling system reference — DaisyUI 5 + Tailwind CSS 4"
+description: "Gib Flow front-end component showcase and styling system reference — DaisyUI 5 + Tailwind CSS 4"
 date: 2026-03-22
 draft: false
 robotsNoIndex: true
@@ -12,7 +12,7 @@ TocOpen: true
 
 ## Styling System
 
-GibFlow uses three libraries that load in this order:
+Gib Flow uses three libraries that load in this order:
 
 | Layer | Library | Purpose |
 |-------|---------|---------|
@@ -209,7 +209,7 @@ Styled blockquote with coloured left border using DaisyUI tokens.
   company = "Rock Renewables Ltd"
   color   = "primary"
 >}}
-GibFlow cut our hosting costs by 40% while reducing our emissions. The team is professional, responsive, and genuinely committed to sustainability. Highly recommended.
+Gib Flow cut our hosting costs by 40% while reducing our emissions. The team is professional, responsive, and genuinely committed to sustainability. Highly recommended.
 {{< /testimonial >}}
 
 {{< testimonial

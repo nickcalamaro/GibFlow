@@ -24,6 +24,7 @@
 {{- $btn2    := .Get "btn2"     | default "" -}}
 {{- $btn2Lnk := .Get "btn2_link"| default "#" -}}
 {{- $variant := .Get "variant"  | default "primary" -}}
+{{- $stores  := .Get "stores"   | default "" -}}
 
 <section class="gf-section bg-base-100">
 <div class="gf-container">
@@ -38,6 +39,12 @@
 
   {{- with .Inner }}
   <div class="mt-3 opacity-90 max-w-lg mx-auto text-sm">{{ . }}</div>
+  {{- end }}
+
+  {{- if eq $stores "true" }}
+  <div class="mt-8">
+    {{- partial "store-badges.html" (dict "align" "center") -}}
+  </div>
   {{- end }}
 
   {{- if or $btn $btn2 }}

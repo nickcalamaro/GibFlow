@@ -1,9 +1,9 @@
 ---
-title: "GibFlow - Gibraltar's Smart Mobility App"
-description: "GibFlow brings real-time bus info, cycling routes, restaurants, hotels and experiences together in one app built for Gibraltar by Gibraltarians, for tourists and locals alike."
+title: "Gib Flow - Gibraltar's Smart Mobility App"
+description: "Gib Flow brings real-time bus info, cycling routes, restaurants, hotels and experiences together in one app. Early access is open now. Official launch December 2026."
 keywords: ["Gibraltar app", "Gibraltar transport", "Gibraltar mobility", "Gibraltar bus tracker", "Gibraltar cycling", "Gibraltar visitor guide", "Gibraltar Business", "Gibraltar experiences", "Gibraltar tourism", "Gibraltar events", "Visit Gibraltar"]
 date: 2026-03-22
-lastmod: 2026-03-25
+lastmod: 2026-11-10
 sitemap:
   priority: 1.0
   changefreq: weekly
@@ -20,14 +20,13 @@ HERO
 ════════════════════════════════════════════════════════════ -->
 {{< hero
 title      = "Gibraltar. One App. Every Journey."
-subtitle   = "Track live buses, find free bike parking, and discover what's near you. Built by Gibraltar residents who understand how the city actually moves."
-cta        = "Get Early Access"
-cta_link   = "#early-access"
-cta2       = "For Businesses"
-cta2_link  = "#for-businesses"
+subtitle   = "Track live buses, find free bike parking, and discover what's near you. Built by Gibraltar residents who understand how the city actually moves. Early access is open now. Official launch: December 2026."
 min_height = "min-h-[90vh]"
 full_bleed = "true"
->}}{{< /hero >}}
+stores     = "true"
+>}}
+<p>Run a business and want to make it easier for customers to find you? <a href="/work-with-us/">Get in contact with us now</a> to learn more about how Gib Flow can put you on the map for tourists and locals.</p>
+{{< /hero >}}
 
 <!-- ═══════════════════════════════════════════════════════════════
 STATS BAR
@@ -67,7 +66,7 @@ WHAT IS GIBFLOW
 <div class="grid md:grid-cols-2 gap-12 items-center reveal">
 
 <div>
-<span class="badge badge-primary mb-4">What is GibFlow?</span>
+<span class="badge badge-primary mb-4">What is Gib Flow?</span>
 <h2 class="text-3xl md:text-4xl font-bold leading-tight mt-2">
 Gibraltar finally has its own app
 </h2>
@@ -75,7 +74,7 @@ Gibraltar finally has its own app
 Google Maps doesn't know when the next Gibraltar bus is coming, where to lock a bike, or which pharmacies are open late on a Sunday. Getting around meant juggling four different apps for buses, maps, parking and local listings.
 </p>
 <p class="mt-3 text-base-content/70 leading-relaxed">
-GibFlow pulls it all together. Bus times, free bike parking, hospitals, restaurants, ATMs, public toilets and EV chargers, sorted by how far they are from where you are right now.
+Gib Flow pulls it all together. Bus times, free bike parking, hospitals, restaurants, ATMs, public toilets and EV chargers, sorted by how far they are from where you are right now. Download it now for early access. The official launch is December 2026.
 </p>
 <ul class="mt-6 space-y-2 text-base-content/80">
 <li class="flex items-center gap-2">🚌 Live bus positions and route maps</li>
@@ -90,7 +89,7 @@ GibFlow pulls it all together. Bus times, free bike parking, hospitals, restaura
 <div>
 <img
 src="/inspiration/GibFlowPhone.jpg"
-alt="GibFlow app showing a map of Gibraltar with bus stops and local services"
+alt="Gib Flow app showing a map of Gibraltar with bus stops and local services"
 class="rounded-box shadow-xl w-full"
 width="480" height="600"
 loading="lazy"
@@ -107,7 +106,7 @@ WHO USES IT
 <section class="gf-section bg-base-200">
 <div class="gf-container">
 <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-<span class="badge badge-secondary mb-4">Who uses GibFlow</span>
+<span class="badge badge-secondary mb-4">Who uses Gib Flow</span>
 <h2 class="text-3xl md:text-4xl font-bold leading-tight mt-2">
 28,000 people cross Gibraltar's border every day
 </h2>
@@ -170,7 +169,7 @@ width="560" height="380" loading="lazy" />
 <span class="badge badge-primary mb-3">Transport</span>
 <h3 class="text-2xl font-bold mt-1">Always know where the next bus is</h3>
 <p class="mt-3 text-base-content/70 leading-relaxed">
-GibFlow connects to Gibraltar's existing bus tracker and shows live positions, route maps and departure times directly on your phone.
+Gib Flow connects to Gibraltar's existing bus tracker and shows live positions, route maps and departure times directly on your phone.
 </p>
 <p class="mt-3 text-base-content/70 leading-relaxed">
 Tap where you want to go. The app works out the best mix of walking, cycling and public transport to get you there.
@@ -189,7 +188,7 @@ width="560" height="380" loading="lazy" />
 <span class="badge badge-accent mb-3">Cycling</span>
 <h3 class="text-2xl font-bold mt-1">Every free bike park in Gibraltar, mapped</h3>
 <p class="mt-3 text-base-content/70 leading-relaxed">
-Gibraltar has a network of government-funded bicycle parking spots across the territory. GibFlow maps every single location so you can check what's nearby before you set off.
+Gibraltar has a network of government-funded bicycle parking spots across the territory. Gib Flow maps every single location so you can check what's nearby before you set off.
 </p>
 <p class="mt-3 text-base-content/70 leading-relaxed">
 Future updates will add integration with secure bike storage as the network grows.
@@ -211,6 +210,39 @@ ATMs, pharmacies, hospitals, AED defibrillators, public toilets, EV charge point
 </div>
 </div>
 
+<div class="mt-20 reveal">
+<div class="text-center max-w-2xl mx-auto mb-10">
+<span class="badge badge-primary mb-4">Early access</span>
+<h2 class="text-3xl md:text-4xl font-bold leading-tight mt-2">See it in use</h2>
+<p class="mt-3 text-base-content/70">Parking, a route across town, and the walk from Casemates Square to Europa Point. This is the app you can download today.</p>
+</div>
+
+<div class="gf-shots">
+<img
+src="/app/parking.webp"
+alt="Gib Flow showing nearby car parks in Gibraltar, including Main Street, Ocean Village and Europa Point"
+width="300" height="649"
+loading="lazy"
+/>
+<img
+src="/app/routes.webp"
+alt="Gib Flow guiding a route across Gibraltar, with walking, cycling, bus and parking on one map"
+width="300" height="649"
+loading="lazy"
+/>
+<img
+src="/app/navigate.webp"
+alt="Gib Flow walking route from Casemates Square to Europa Point, with bike and bus alternatives"
+width="300" height="649"
+loading="lazy"
+/>
+</div>
+
+<div class="mt-10">
+{{< store-badges >}}
+</div>
+</div>
+
 </div>
 </section>
 
@@ -227,7 +259,7 @@ SUSTAINABILITY
 When the bus is easy to find, more people take it
 </h2>
 <p class="mt-4 text-base-content/70 leading-relaxed">
-GibFlow supports Gibraltar's sustainability targets by making public transport and active travel the straightforward choice. When cycling routes and bus times are one tap away, the shift in behaviour follows.
+Gib Flow supports Gibraltar's sustainability targets by making public transport and active travel the straightforward choice. When cycling routes and bus times are one tap away, the shift in behaviour follows.
 </p>
 <p class="mt-3 text-base-content/70 leading-relaxed">
 28,000 border crossings a day, plus air and cruise arrivals, all moving through one small territory. Shifting even a fraction of those journeys from private cars to buses and bikes has a real effect.
@@ -274,15 +306,25 @@ loading="lazy"
 <!-- ═══════════════════════════════════════════════════════════════
 EARLY ACCESS
 ════════════════════════════════════════════════════════════ -->
-<section class="py-24 px-6 bg-primary" id="early-access">
+<section class="py-24 px-6 bg-primary" id="download">
 <div class="max-w-xl mx-auto text-center">
-<span class="badge badge-neutral mb-6">Stay Updated</span>
-<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Keep up with GibFlow</h2>
+<span class="badge badge-neutral mb-6">Available now</span>
+<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Download Gib Flow</h2>
 <p class="mt-4 text-lg text-primary-content/80 leading-relaxed">
-GibFlow is heading to iOS and Android. Sign up to stay in the loop on the launch, new features as they roll out, and updates on what's coming for transport and mobility in Gibraltar. We send emails when there's something worth telling you.
+Early access is open on iPhone and Android. Sign up to stay in the loop on the launch, new features as they roll out, and updates on what's coming for transport and mobility in Gibraltar. We'll only send emails when there's something worth telling you.
+
+</p>
+
+<div class="mt-8">
+{{< store-badges >}}
+</div>
+
+<p class="mt-12 text-primary-content/80 leading-relaxed">
+Leave your email if you want a note when something new ships.
 </p>
 <p class="mt-2 text-sm text-primary-content/60">No spam. Unsubscribe any time by replying to any email.</p>
 
+<span id="early-access"></span>
 {{< early-access >}}
 
 </div>
@@ -301,10 +343,10 @@ FOR BUSINESSES
 Get your business on the map
 </h2>
 <p class="mt-4 text-base-content/70 leading-relaxed">
-GibFlow is taking early business listings ahead of the public launch. Your business shows up in map searches, category filters and proximity results for everyone using the app.
+Gib Flow is in early access now. The official launch is December 2026. Your business shows up in map searches, category filters and proximity results for everyone using the app.
 </p>
 <p class="mt-3 text-base-content/70 leading-relaxed">
-26,800 border crossings a day. A large portion of those people are looking for somewhere to eat, shop or use a service right now. GibFlow is how they find you. Not just at launch. Every day.
+26,800 border crossings a day. A large portion of those people are looking for somewhere to eat, shop or use a service right now. Gib Flow is how they find you. Not just at launch. Every day.
 </p>
 
 <ul class="mt-6 space-y-3 text-base-content/80">
@@ -326,7 +368,7 @@ GibFlow is taking early business listings ahead of the public launch. Your busin
 </li>
 <li class="flex items-start gap-3">
 <span class="text-secondary font-bold mt-0.5">✓</span>
-<span>Early partner rates available before public launch</span>
+<span>Early partner rates available until the December 2026 launch</span>
 </li>
 </ul>
 
@@ -338,7 +380,7 @@ GibFlow is taking early business listings ahead of the public launch. Your busin
 <div>
 <img
 src="/inspiration/GibFlowPhone2.jpg"
-alt="GibFlow app showing local business listings near the user"
+alt="Gib Flow app showing local business listings near the user"
 class="rounded-box shadow-xl w-full"
 width="480" height="580"
 loading="lazy"
@@ -354,10 +396,9 @@ FINAL CTA
 ════════════════════════════════════════════════════════════ -->
 {{< cta
 title     = "Ready to go?"
-subtitle  = "This won't just launch. It'll embed itself into how Gibraltar flows. Sign up for early access, or talk to us about getting your business listed."
-btn       = "Get Early Access"
-btn_link  = "#early-access"
+subtitle  = "Early access is open. Official launch December 2026. Download the app, or talk to us about getting your business listed."
 btn2      = "Work With Us"
 btn2_link = "/work-with-us/"
 variant   = "primary"
+stores    = "true"
 >}}{{< /cta >}}

@@ -1,5 +1,5 @@
 /* =============================================================================
-   GibFlow — Main Stylesheet
+   Gib Flow — Main Stylesheet
    Tailwind CSS 4 + DaisyUI 5
    Custom themes: "light" and "dark" (map to PaperMod's data-theme values)
 
@@ -35,8 +35,8 @@
 }
 
 /* =============================================================================
-   GibFlow Light Theme
-   Based on the GibFlow logo: logo red RGB(192,15,27) as primary.
+   Gib Flow Light Theme
+   Based on the Gib Flow logo: logo red RGB(192,15,27) as primary.
 
    Design rationale:
    · 60-30-10 rule (Nielsen Norman Group, Material Design):
@@ -100,8 +100,8 @@
 }
 
 /* =============================================================================
-   GibFlow Dark Theme
-   GibFlow at night — deep black base, logo red stays the focal point.
+   Gib Flow Dark Theme
+   Gib Flow at night — deep black base, logo red stays the focal point.
    ============================================================================= */
 @plugin "daisyui/theme" {
   name: "dark";
@@ -260,6 +260,77 @@
   padding-block: 3rem;
 }
 
+/* App Store and Google Play badges.
+   Official assets sit on a white plate so they stay readable on the hero,
+   the red download band, light sections, and in dark mode. The Play badge
+   file includes transparent padding, so its box is taller than the Apple
+   badge; the visible buttons line up. */
+.gf-stores-row--center {
+  display: flex;
+  justify-content: center;
+}
+.gf-stores-row--start {
+  display: flex;
+  justify-content: flex-start;
+}
+.gf-stores {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem;
+  width: fit-content;
+  max-width: 100%;
+  background: #fff;
+  border: 1px solid oklch(91% 0.006 27);
+  border-radius: 0.85rem;
+  padding: 0.2rem 0.55rem 0.2rem 0.7rem;
+}
+.gf-stores a {
+  display: block;
+  line-height: 0;
+  border-bottom: none;
+  box-shadow: none;
+  text-decoration: none;
+}
+.gf-stores a:hover {
+  opacity: 0.86;
+}
+.gf-stores img,
+.post-content .gf-stores img {
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  max-width: none;
+  width: auto;
+}
+.gf-store-apple {
+  height: 44px;
+}
+.gf-store-play {
+  height: 66px;
+}
+
+/* App screenshots. The files already include the red marketing frame. */
+.gf-shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+.gf-shots img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.25rem;
+  display: block;
+}
+@media (max-width: 768px) {
+  .gf-shots {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}
+
 /* Footer wrapper — avoids PaperMod's .footer max-width constraint */
 .gf-footer {
   background-color: var(--color-base-200);
@@ -333,8 +404,21 @@ body.list {
 .header button {
   color: var(--color-base-content);
 }
-/* Logo image: Hugo outputs 200px tall for retina sharpness; cap visual display size */
+/* Logo image: the mark is square, so give it a little more height than a wide wordmark. */
 .logo a img {
-  height: 50px;
+  height: 58px;
   width: auto;
+}
+
+/* Business line in the hero. The link has to stay visible on the dark photo. */
+.gf-hero-note a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-bottom: none;
+  box-shadow: none;
+}
+.gf-hero-note a:hover {
+  opacity: 0.8;
 }

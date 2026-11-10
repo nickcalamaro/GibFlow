@@ -35,12 +35,13 @@
 {{- $align     := .Get "align"      | default "center" -}}
 {{- $minH      := .Get "min_height" | default "min-h-[28rem]" -}}
 {{- $fullBleed := .Get "full_bleed" | default "false" -}}
+{{- $stores    := .Get "stores"     | default "" -}}
 {{- $hasBg     := or $image (eq $fullBleed "true") -}}
 {{- $rounded   := cond (eq $fullBleed "true") "" "rounded-box" -}}
 {{- $mb        := cond (eq $fullBleed "true") "" "mb-8" -}}
 
 <section
-  class="hero {{ $minH }} {{ $rounded }} {{ $mb }} overflow-hidden relative"
+  class="hero {{ $minH }} {{ $rounded }} {{ $mb }} overflow-hidden relative{{ if eq $fullBleed "true" }} pb-28{{ end }}"
   {{- if $image }} style="background-image: url('{{ $image }}'); background-position: {{ $bgPos }};"{{ end }}>
 
   {{- if $hasBg }}
@@ -79,9 +80,15 @@
     {{- end }}
 
     {{- with .Inner }}
-    <div class="mt-4 text-sm
-      {{- if $hasBg }} text-neutral-content/70{{ else }} text-base-content/60{{ end }}">
-      {{ . }}
+    <div class="gf-hero-note mt-6 max-w-xl text-base md:text-lg leading-relaxed
+      {{- if $hasBg }} text-neutral-content/90{{ else }} text-base-content/80{{ end }}">
+      {{ . | safeHTML }}
+    </div>
+    {{- end }}
+
+    {{- if eq $stores "true" }}
+    <div class="mt-8">
+      {{- partial "store-badges.html" (dict "align" $align) -}}
     </div>
     {{- end }}
 
@@ -89,7 +96,7 @@
 
   {{- if eq $fullBleed "true" }}
   <div class="absolute bottom-8 inset-x-0 flex flex-col items-center gap-2 text-neutral-content/60 pointer-events-none">
-    <span class="text-xs font-medium tracking-widest uppercase">Explore What GibFlow Offers</span>
+    <span class="text-xs font-medium tracking-widest uppercase">Explore What Gib Flow Offers</span>
     <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
     </svg>

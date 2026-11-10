@@ -1,4 +1,4 @@
-# GibFlow — Copilot Coding Instructions
+# Gib Flow — Copilot Coding Instructions
 
 ## Stack
 - Hugo 0.146+ extended, PaperMod theme (git submodule)
@@ -158,7 +158,7 @@ as a placeholder. Do not add workarounds there.
 
 ## Bunny Edge Scripting (`src/script.ts`)
 
-The GibFlow backend runs as a **Bunny Edge Script** (standalone type).
+The Gib Flow backend runs as a **Bunny Edge Script** (standalone type).
 The script is deployed via GitHub Actions (`.github/workflows/release-on-bunny.yml`)
 which pushes `src/script.ts` directly to Bunny script ID 69384.
 

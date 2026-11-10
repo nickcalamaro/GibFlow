@@ -1,10 +1,10 @@
 baseURL      = 'https://gibflow.gi/'
 languageCode = 'en-gb'
-title        = "GibFlow — Gibraltar's Smart Mobility App"
+title        = "Gib Flow — Gibraltar's Smart Mobility App"
 theme        = 'PaperMod'
 
 # Rewrite root-relative URLs (/foo) to absolute URLs using baseURL.
-# Required when the site is served from a subdirectory (e.g. /GibFlow/ on GitHub Pages).
+# Required when the site is served from a subdirectory on GitHub Pages.
 canonifyURLs = true
 
 # ── SEO ────────────────────────────────────────────────────────────────────────
@@ -17,9 +17,9 @@ enableRobotsTXT = true
 
 [params]
   env    = 'production'
-  author = 'GibFlow Team'
+  author = 'Gib Flow Team'
 
-  description = "GibFlow brings real-time bus info, cycling routes, parking and local services together in one app — built for Gibraltar by people who know how the city moves."
+  description = "Gib Flow brings real-time bus info, cycling routes, parking and local services together in one app. Early access is open on iOS and Android. Official launch December 2026."
   keywords    = ['Gibraltar app', 'Gibraltar transport', 'Gibraltar mobility', 'Gibraltar bus tracker', 'Gibraltar cycling', 'Gibraltar smart city', 'Gibraltar visitor guide']
 
   # Bunny Edge Script URL for the contact form.
@@ -45,7 +45,7 @@ enableRobotsTXT = true
   # In TOML, once a subtable header is opened, subsequent bare keys
   # belong to the subtable, not the parent. Keeping it last avoids that trap.
   [params.label]
-    icon       = "inspiration/GibFlowLogo.jpg"
+    icon       = "inspiration/gib-flow-logo.png"
     iconHeight = 200
     text       = "Gibraltar's Smart Mobility App"
 
@@ -69,9 +69,9 @@ enableRobotsTXT = true
     weight     = 30
 
   [[menu.main]]
-    identifier = 'early-access'
-    name       = 'Get Early Access'
-    url        = '/#early-access'
+    identifier = 'download'
+    name       = 'Download'
+    url        = '/#download'
     weight     = 40
 
 # ── Footer columns ────────────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ enableRobotsTXT = true
 # Three columns: navigation, legal, and support.
 [params.footer]
   [params.footer.brand]
-    tagline = "Gibraltar's smart mobility app — real-time bus info, secure cycle parking, and local navigation in one place."
+    tagline = "Gibraltar's smart mobility app. Early access is open now. Official launch December 2026."
 
 [[params.footer.columns]]
   title = "Navigate"
@@ -88,7 +88,7 @@ enableRobotsTXT = true
     {label = "Features",         url = "/#features"},
     {label = "For Businesses",   url = "/#for-businesses"},
     {label = "Work With Us",     url = "/work-with-us/"},
-    {label = "Get Early Access", url = "/#early-access"},
+    {label = "Download the app", url = "/#download"},
   ]
 
 [[params.footer.columns]]

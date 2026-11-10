@@ -1,6 +1,6 @@
 ---
 title: "Cookie Policy"
-description: "GibFlow's cookie policy — how we use cookies on our website, what your choices are, and how to manage your preferences. Compliant with UK GDPR and Gibraltar data protection law."
+description: "Gib Flow's cookie policy — how we use cookies on our website, what your choices are, and how to manage your preferences. Compliant with UK GDPR and Gibraltar data protection law."
 date: 2026-03-25
 lastmod: 2026-03-25
 sitemap:
@@ -10,7 +10,7 @@ draft: false
 showToc: true
 TocOpen: false
 hideMeta: true
-keywords: ["GibFlow cookie policy", "GDPR cookies Gibraltar", "cookie consent GibFlow", "website cookies", "cookie preferences", "Gibraltar data protection cookies"]
+keywords: ["Gib Flow cookie policy", "GDPR cookies Gibraltar", "cookie consent Gib Flow", "website cookies", "cookie preferences", "Gibraltar data protection cookies"]
 ---
 
 <div class="not-prose mb-8 flex flex-wrap gap-3 items-start">
@@ -18,7 +18,7 @@ keywords: ["GibFlow cookie policy", "GDPR cookies Gibraltar", "cookie consent Gi
   <div class="badge badge-ghost">Last updated: 25 March 2026</div>
 </div>
 
-This Cookie Policy explains how Gib Flow Ltd ("GibFlow", "we", "us", "our") uses cookies and similar tracking technologies on the GibFlow website at [gibflow.gi](https://gibflow.gi) ("Website").
+This Cookie Policy explains how Gib Flow Ltd ("Gib Flow", "we", "us", "our") uses cookies and similar tracking technologies on the Gib Flow website at [gibflow.gi](https://gibflow.gi) ("Website").
 
 This Policy should be read alongside our [Privacy Policy](/privacy/), which explains more broadly how we collect and use personal data.
 

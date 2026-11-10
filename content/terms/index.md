@@ -1,6 +1,6 @@
 ---
 title: "Terms and Conditions"
-description: "GibFlow Ltd's terms and conditions governing use of the GibFlow mobile application, secure bicycle parking facilities, and related services in Gibraltar."
+description: "Gib Flow Ltd's terms and conditions governing use of the Gib Flow mobile application, secure bicycle parking facilities, and related services in Gibraltar."
 date: 2026-02-23
 lastmod: 2026-02-23
 sitemap:
@@ -10,7 +10,7 @@ draft: false
 showToc: true
 TocOpen: false
 hideMeta: true
-keywords: ["GibFlow terms and conditions", "GibFlow terms of service", "Gibraltar app terms", "bicycle parking terms", "GibFlow user agreement", "Gib Flow Ltd"]
+keywords: ["Gib Flow terms and conditions", "Gib Flow terms of service", "Gibraltar app terms", "bicycle parking terms", "Gib Flow user agreement", "Gib Flow Ltd"]
 ---
 
 <div class="not-prose mb-8 flex flex-wrap gap-3 items-start">
@@ -18,7 +18,7 @@ keywords: ["GibFlow terms and conditions", "GibFlow terms of service", "Gibralta
   <div class="badge badge-ghost">Governed by Gibraltar law</div>
 </div>
 
-These Terms and Conditions govern your access to and use of the GibFlow mobile application operated by Gib Flow Ltd ("we", "us", "our").
+These Terms and Conditions govern your access to and use of the Gib Flow mobile application operated by Gib Flow Ltd ("we", "us", "our").
 
 By downloading, accessing, or using the App, you agree to be bound by these Terms. If you do not agree, you must not use the App.
 
@@ -48,7 +48,7 @@ You acknowledge that:
 
 - Real-time bus tracking (where available) relies on third-party data sources
 - Delays, inaccuracies, or service disruptions may occur
-- GibFlow does not guarantee accuracy, completeness, or uninterrupted availability of transport data
+- Gib Flow does not guarantee accuracy, completeness, or uninterrupted availability of transport data
 
 Users should independently verify critical travel information.
 
@@ -108,7 +108,7 @@ We are not liable for service interruptions beyond our reasonable control.
 
 To the fullest extent permitted by law:
 
-- GibFlow shall not be liable for indirect, incidental, or consequential damages
+- Gib Flow shall not be liable for indirect, incidental, or consequential damages
 - Our total liability arising out of or relating to the App shall not exceed the total amount paid by you in the preceding 12 months (if any)
 
 Nothing in these Terms excludes liability for death or personal injury caused by negligence, fraud, or any liability that cannot legally be excluded under Gibraltar law.
@@ -141,7 +141,7 @@ These Terms are governed by the laws of Gibraltar. Any disputes shall be subject
 
 ## Secure Bicycle Parking
 
-GibFlow lets you book secure bicycle parking slots in advance through the App. The App acts as a digital access key to unlock and access participating facilities.
+Gib Flow lets you book secure bicycle parking slots in advance through the App. The App acts as a digital access key to unlock and access participating facilities.
 
 Access is granted only:
 
@@ -160,7 +160,7 @@ You agree that:
 
 ### Liability for Stored Property
 
-While reasonable security measures are implemented, GibFlow does not guarantee prevention of theft, damage, or loss. Use of secure bicycle parking facilities is at your own risk.
+While reasonable security measures are implemented, Gib Flow does not guarantee prevention of theft, damage, or loss. Use of secure bicycle parking facilities is at your own risk.
 
 To the fullest extent permitted by law, we are not liable for:
 
