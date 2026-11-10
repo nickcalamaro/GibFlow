@@ -1,36 +1,36 @@
 ---
-title: "Download GibFlow"
-description: "Download GibFlow for iOS and Android. Store links are being prepared ahead of launch."
+title: "Download Gib Flow"
+description: "Gib Flow is in early access on the App Store and Google Play. Download it now. Official launch December 2026."
 date: 2026-05-14
-lastmod: 2026-05-14
+lastmod: 2026-11-10
 sitemap:
   priority: 0.8
   changefreq: weekly
 hideMeta: true
 hideSummary: true
 searchHidden: true
-keywords: ["GibFlow download", "Gibraltar app iOS", "Gibraltar app Android", "GibFlow coming soon"]
+keywords: ["Gib Flow download", "Gibraltar app iOS", "Gibraltar app Android", "Gib Flow early access"]
 ---
 
 <div class="gf-download">
 <section class="gf-section bg-base-100">
 <div class="gf-container">
 <div class="gf-download-hero reveal">
-<span class="badge badge-primary mb-4">Mobile Apps</span>
-<h1 class="text-4xl md:text-5xl font-bold leading-tight mt-2">GibFlow is landing on iOS and Android</h1>
+<span class="badge badge-primary mb-4">Early access</span>
+<h1 class="text-4xl md:text-5xl font-bold leading-tight mt-2">Gib Flow is on iPhone and Android</h1>
 <p class="mt-4 text-lg text-base-content/75 max-w-3xl">
-We are preparing the official store listings now. The app badges are in place and the links will go live as soon as each release is approved.
+Early access is open on the App Store and Google Play. Download it now. The official launch is December 2026.
 </p>
 
 <div class="grid md:grid-cols-2 gap-4 mt-8 not-prose reveal-stagger">
-<a class="store-link-card is-coming-soon" href="#" aria-disabled="true" tabindex="-1">
-<img class="store-badge-img" src="/store-badges/app-store-badge.svg" alt="Download on the App Store badge" loading="lazy" />
-<span class="coming-soon-chip">Coming soon on iOS</span>
+<a class="store-link-card" href="https://apps.apple.com/gb/app/gibflow/id6780934762" target="_blank" rel="noopener noreferrer">
+<img class="store-badge-img" src="/store-badges/app-store-badge.svg" alt="Download on the App Store" loading="lazy" />
+<span class="coming-soon-chip">Early access on iOS</span>
 </a>
 
-<a class="store-link-card is-coming-soon" href="#" aria-disabled="true" tabindex="-1">
-<img class="store-badge-img store-badge-img--google-play" src="/store-badges/google-play-badge.png" alt="Get it on Google Play badge" loading="lazy" />
-<span class="coming-soon-chip">Coming soon on Android</span>
+<a class="store-link-card" href="https://play.google.com/store/apps/details?id=gi.gibflow.android" target="_blank" rel="noopener noreferrer">
+<img class="store-badge-img store-badge-img--google-play" src="/store-badges/google-play-badge.png" alt="Get it on Google Play" loading="lazy" />
+<span class="coming-soon-chip">Early access on Android</span>
 </a>
 </div>
 </div>
@@ -105,10 +105,10 @@ and
 
 <section class="py-24 px-6 bg-primary" id="early-access">
 <div class="max-w-xl mx-auto text-center reveal">
-<span class="badge badge-neutral mb-6">Stay Updated</span>
-<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Be first to know when GibFlow is available</h2>
+<span class="badge badge-neutral mb-6">Stay in the loop</span>
+<h2 class="text-3xl md:text-4xl font-bold text-primary-content">Want a note when something new ships?</h2>
 <p class="mt-4 text-lg text-primary-content/80 leading-relaxed">
-The App Store and Google Play listings are on the way. Leave your details and we will email you as soon as GibFlow is ready to download, plus news on launch features and mobility updates in Gibraltar.
+Early access is open. Leave your email for the December 2026 launch, new features as they roll out, and updates on transport and mobility in Gibraltar.
 </p>
 <p class="mt-2 text-sm text-primary-content/60">No spam. Unsubscribe any time by replying to any email.</p>
 
