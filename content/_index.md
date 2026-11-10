@@ -149,9 +149,68 @@ Some grew up here. Some flew in this morning. Some are off a cruise ship for fou
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
+SEE IT IN USE
+════════════════════════════════════════════════════════════ -->
+<section class="gf-section bg-base-100" id="see-it">
+<div class="gf-container">
+<div class="text-center max-w-2xl mx-auto mb-10 reveal">
+<span class="badge badge-primary mb-4">Early access</span>
+<h2 class="text-3xl md:text-4xl font-bold leading-tight mt-2">See it in use</h2>
+<p class="mt-3 text-base-content/70">Navigation, parking, buses and the services around you. This is the app you can download today.</p>
+</div>
+
+<div class="gf-carousel reveal" data-carousel>
+<div class="gf-carousel-viewport" tabindex="0" aria-label="Gib Flow app posters">
+<img
+src="/app/see-it-exploring.jpg"
+alt="Gib Flow poster: Less searching. More exploring. Two phones showing turn-by-turn directions across Gibraltar."
+width="473" height="1024"
+/>
+<img
+src="/app/see-it-services.jpg"
+alt="Gib Flow poster: Buses, parking, local businesses and essential services, with the map open on Main Street."
+width="473" height="1024"
+loading="lazy"
+/>
+<img
+src="/app/see-it-commute.jpg"
+alt="Gib Flow poster: From your morning commute to your next local discovery, showing Queensway Car Park and a parking session."
+width="473" height="1024"
+loading="lazy"
+/>
+<img
+src="/app/see-it-filters.jpg"
+alt="Gib Flow poster: Gibraltar deserves an app that understands how it moves, with filters for parking, buses and public services."
+width="473" height="1024"
+loading="lazy"
+/>
+</div>
+<div class="gf-carousel-controls">
+<button type="button" class="gf-carousel-btn" data-carousel-prev aria-label="Previous poster">
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<div class="gf-carousel-dots" role="tablist" aria-label="Choose a poster">
+<button type="button" class="gf-carousel-dot" role="tab" aria-label="Less searching" aria-current="true"></button>
+<button type="button" class="gf-carousel-dot" role="tab" aria-label="Buses and services"></button>
+<button type="button" class="gf-carousel-dot" role="tab" aria-label="Parking"></button>
+<button type="button" class="gf-carousel-dot" role="tab" aria-label="Filters"></button>
+</div>
+<button type="button" class="gf-carousel-btn" data-carousel-next aria-label="Next poster">
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+</div>
+</div>
+
+<div class="mt-10">
+{{< store-badges >}}
+</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
 FEATURES
 ════════════════════════════════════════════════════════════ -->
-<section class="gf-section bg-base-100" id="features">
+<section class="gf-section bg-base-200" id="features">
 <div class="gf-container">
 
 <div class="text-center max-w-2xl mx-auto mb-14 reveal">
@@ -210,46 +269,13 @@ ATMs, pharmacies, hospitals, AED defibrillators, public toilets, EV charge point
 </div>
 </div>
 
-<div class="mt-20 reveal">
-<div class="text-center max-w-2xl mx-auto mb-10">
-<span class="badge badge-primary mb-4">Early access</span>
-<h2 class="text-3xl md:text-4xl font-bold leading-tight mt-2">See it in use</h2>
-<p class="mt-3 text-base-content/70">Parking, a route across town, and the walk from Casemates Square to Europa Point. This is the app you can download today.</p>
-</div>
-
-<div class="gf-shots">
-<img
-src="/app/parking.webp"
-alt="Gib Flow showing nearby car parks in Gibraltar, including Main Street, Ocean Village and Europa Point"
-width="300" height="649"
-loading="lazy"
-/>
-<img
-src="/app/routes.webp"
-alt="Gib Flow guiding a route across Gibraltar, with walking, cycling, bus and parking on one map"
-width="300" height="649"
-loading="lazy"
-/>
-<img
-src="/app/navigate.webp"
-alt="Gib Flow walking route from Casemates Square to Europa Point, with bike and bus alternatives"
-width="300" height="649"
-loading="lazy"
-/>
-</div>
-
-<div class="mt-10">
-{{< store-badges >}}
-</div>
-</div>
-
 </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
 SUSTAINABILITY
 ════════════════════════════════════════════════════════════ -->
-<section class="gf-section bg-base-200">
+<section class="gf-section bg-base-100">
 <div class="gf-container">
 <div class="grid md:grid-cols-2 gap-12 items-center">
 
@@ -266,22 +292,22 @@ Gib Flow supports Gibraltar's sustainability targets by making public transport 
 </p>
 
 <div class="grid grid-cols-2 gap-4 mt-8 reveal-stagger">
-<div class="bg-base-100 rounded-box p-4 shadow-sm">
+<div class="bg-base-200 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Up</div>
 <div class="text-sm font-semibold mt-1">Public transport use</div>
 <div class="text-xs text-base-content/60 mt-1">More bus and walking trips, fewer private cars</div>
 </div>
-<div class="bg-base-100 rounded-box p-4 shadow-sm">
+<div class="bg-base-200 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Down</div>
 <div class="text-sm font-semibold mt-1">City congestion</div>
 <div class="text-xs text-base-content/60 mt-1">Smarter routing spreads demand across all routes</div>
 </div>
-<div class="bg-base-100 rounded-box p-4 shadow-sm">
+<div class="bg-base-200 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Better</div>
 <div class="text-sm font-semibold mt-1">Visitor experience</div>
 <div class="text-xs text-base-content/60 mt-1">Tourists navigate with confidence from the moment they arrive</div>
 </div>
-<div class="bg-base-100 rounded-box p-4 shadow-sm">
+<div class="bg-base-200 rounded-box p-4 shadow-sm">
 <div class="text-2xl font-bold text-primary">Aligned</div>
 <div class="text-sm font-semibold mt-1">Smart-city goals</div>
 <div class="text-xs text-base-content/60 mt-1">Supports Gibraltar's digital transformation targets</div>

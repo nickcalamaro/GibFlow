@@ -27,3 +27,50 @@
   els.forEach(function (el) { io.observe(el); });
 })();
 </script>
+<script>
+(function () {
+  var root = document.querySelector('[data-carousel]');
+  if (!root) return;
+
+  var viewport = root.querySelector('.gf-carousel-viewport');
+  var slides = viewport ? viewport.querySelectorAll('img') : [];
+  var dots = root.querySelectorAll('.gf-carousel-dot');
+  var prev = root.querySelector('[data-carousel-prev]');
+  var next = root.querySelector('[data-carousel-next]');
+  if (!viewport || !slides.length) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function index() {
+    var width = viewport.clientWidth;
+    if (!width) return 0;
+    return Math.max(0, Math.min(slides.length - 1, Math.round(viewport.scrollLeft / width)));
+  }
+
+  function go(i) {
+    var nextIndex = (i + slides.length) % slides.length;
+    viewport.scrollTo({
+      left: nextIndex * viewport.clientWidth,
+      behavior: reduce ? 'auto' : 'smooth'
+    });
+  }
+
+  function sync() {
+    var current = index();
+    dots.forEach(function (dot, n) {
+      if (n === current) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+  }
+
+  if (prev) prev.addEventListener('click', function () { go(index() - 1); });
+  if (next) next.addEventListener('click', function () { go(index() + 1); });
+  dots.forEach(function (dot, n) {
+    dot.addEventListener('click', function () { go(n); });
+  });
+  viewport.addEventListener('scroll', function () {
+    window.requestAnimationFrame(sync);
+  }, { passive: true });
+  sync();
+})();
+</script>
